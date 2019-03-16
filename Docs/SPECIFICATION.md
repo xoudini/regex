@@ -35,7 +35,7 @@ In short, the regular expression will be transformed into an NFA, which consumes
 | NFA construction | `O(k)`   | `O(m)`     |
 | Input matching   | `O(emn)` | `O(n)`     |
 
-<sup>
+
 Where:
 
 - _k_ is the length of the regular expression
@@ -43,7 +43,6 @@ Where:
 - _e_ is the number of transitions in the NFA
 - _m_ is the number of states in the NFA
 
-</sup>
 
 In essence, the both the time complexity and the space complexity of the program will be linear to the size of the inputs.
 
