@@ -18,14 +18,14 @@ The problem is simply constructing an intermediate representation for a regular 
 
 For constructing the intermediate representation, _Thompson's construction_ will be used as inspiration for the approach. Hence, the intermediate representation will be an NFA. A deterministic finite automaton (DFA) could be constructed from the NFA, but this would unnecessarily bloat both the time and space complexities during the construction phase.
 
-Breadth-first traversal was elected due to its linear time complexity with regard to the length of the input string, and for the fact that branches can be short-circuited immediately on failure. Another option would be to traverse the graph depth-first and use backtracking, but this would have a significant impact on efficiency for some cases.
+Breadth-first traversal was elected due to its linear time complexity with regard to the length of the input string, and for the fact that branches can be short-circuited immediately on failure. Another option would be to traverse the graph depth-first and use backtracking, but this would have a significant impact on efficiency in some cases.
 
 
 ### Program input
 
 The program input will be a regular expression, the features of which will be specified later, as well as a string to match against. If time permits, a `grep`-style feature for matching lines in a file may be implemented.
 
-In short, the regular expression will be transformed into an NFA, which consumes the given string on a character-by-character basis, and returns either a truthy or falsy value.
+In short, the regular expression will be transformed into an NFA, which consumes the given string on a character-by-character basis, and returns either a truthy or falsy value, depending on whether the string matches the pattern.
 
 
 ### Expected time and space complexities
@@ -44,7 +44,7 @@ Where:
 - _m_ is the number of states in the NFA
 
 
-In essence, the both the time complexity and the space complexity of the program will be linear to the size of the inputs.
+In essence, both the time complexity and the space complexity of the program will be linear with regard to the size of the inputs.
 
 
 ### Sources
