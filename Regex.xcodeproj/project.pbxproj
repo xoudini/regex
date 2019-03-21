@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C917A2243E6EF005F4888 /* RegexTests.swift */; };
 		377C91852243EE53005F4888 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C91842243EE53005F4888 /* Stack.swift */; };
+		377C918A2243FEA1005F4888 /* StackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C91892243FEA1005F4888 /* StackTests.swift */; };
+		377C918D2243FF4E005F4888 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C91842243EE53005F4888 /* Stack.swift */; };
 		37AB2C65223CF636004171E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB2C64223CF636004171E8 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,7 @@
 		377C917A2243E6EF005F4888 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		377C917C2243E6EF005F4888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377C91842243EE53005F4888 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		377C91892243FEA1005F4888 /* StackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
 		37AB2C61223CF636004171E8 /* regex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = regex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AB2C64223CF636004171E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				377C917A2243E6EF005F4888 /* RegexTests.swift */,
+				377C91892243FEA1005F4888 /* StackTests.swift */,
 				377C917C2243E6EF005F4888 /* Info.plist */,
 			);
 			path = Tests;
@@ -183,6 +187,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377C918D2243FF4E005F4888 /* Stack.swift in Sources */,
+				377C918A2243FEA1005F4888 /* StackTests.swift in Sources */,
 				377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
