@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C917A2243E6EF005F4888 /* RegexTests.swift */; };
 		37AB2C65223CF636004171E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB2C64223CF636004171E8 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,11 +24,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		377C91782243E6EF005F4888 /* RegexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RegexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		377C917A2243E6EF005F4888 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
+		377C917C2243E6EF005F4888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37AB2C61223CF636004171E8 /* regex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = regex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AB2C64223CF636004171E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		377C91752243E6EF005F4888 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37AB2C5E223CF636004171E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,10 +49,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		377C91792243E6EF005F4888 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				377C917A2243E6EF005F4888 /* RegexTests.swift */,
+				377C917C2243E6EF005F4888 /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		37AB2C58223CF636004171E8 = {
 			isa = PBXGroup;
 			children = (
 				37AB2C63223CF636004171E8 /* Source */,
+				377C91792243E6EF005F4888 /* Tests */,
 				37AB2C62223CF636004171E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				37AB2C61223CF636004171E8 /* regex */,
+				377C91782243E6EF005F4888 /* RegexTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,6 +87,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		377C91772243E6EF005F4888 /* RegexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 377C917F2243E6EF005F4888 /* Build configuration list for PBXNativeTarget "RegexTests" */;
+			buildPhases = (
+				377C91742243E6EF005F4888 /* Sources */,
+				377C91752243E6EF005F4888 /* Frameworks */,
+				377C91762243E6EF005F4888 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RegexTests;
+			productName = RegexTests;
+			productReference = 377C91782243E6EF005F4888 /* RegexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		37AB2C60223CF636004171E8 /* regex */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37AB2C68223CF636004171E8 /* Build configuration list for PBXNativeTarget "regex" */;
@@ -92,6 +131,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Dan Lindholm";
 				TargetAttributes = {
+					377C91772243E6EF005F4888 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					37AB2C60223CF636004171E8 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -110,11 +152,30 @@
 			projectRoot = "";
 			targets = (
 				37AB2C60223CF636004171E8 /* regex */,
+				377C91772243E6EF005F4888 /* RegexTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		377C91762243E6EF005F4888 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		377C91742243E6EF005F4888 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37AB2C5D223CF636004171E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,6 +187,40 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		377C917D2243E6EF005F4888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xoudini.RegexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		377C917E2243E6EF005F4888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xoudini.RegexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		37AB2C66223CF636004171E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -262,6 +357,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		377C917F2243E6EF005F4888 /* Build configuration list for PBXNativeTarget "RegexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				377C917D2243E6EF005F4888 /* Debug */,
+				377C917E2243E6EF005F4888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		37AB2C5C223CF636004171E8 /* Build configuration list for PBXProject "Regex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
