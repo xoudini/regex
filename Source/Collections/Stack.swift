@@ -5,7 +5,7 @@
 import Foundation
 
 class Stack<Element> {
-    private var representation: [Element]
+    private(set) var representation: [Element]
     
     var count: Int {
         return self.representation.count
@@ -25,6 +25,10 @@ class Stack<Element> {
     
     func pop() -> Element? {
         return self.representation.popLast()
+    }
+    
+    func clear() {
+        self.representation.removeAll()
     }
 }
 
