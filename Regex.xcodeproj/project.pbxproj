@@ -13,6 +13,8 @@
 		377C918D2243FF4E005F4888 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C91842243EE53005F4888 /* Stack.swift */; };
 		377C918F224404CC005F4888 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C918E224404CC005F4888 /* Expression.swift */; };
 		377C919122445C3F005F4888 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C919022445C3F005F4888 /* Parser.swift */; };
+		377C919222455968005F4888 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C918E224404CC005F4888 /* Expression.swift */; };
+		377C919322455968005F4888 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C919022445C3F005F4888 /* Parser.swift */; };
 		37AB2C65223CF636004171E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB2C64223CF636004171E8 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -193,6 +195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377C919222455968005F4888 /* Expression.swift in Sources */,
+				377C919322455968005F4888 /* Parser.swift in Sources */,
 				377C918D2243FF4E005F4888 /* Stack.swift in Sources */,
 				377C918A2243FEA1005F4888 /* StackTests.swift in Sources */,
 				377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */,
