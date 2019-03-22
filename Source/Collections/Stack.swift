@@ -11,6 +11,10 @@ class Stack<Element> {
         return self.representation.count
     }
     
+    var peek: Element? {
+        return self.representation.last
+    }
+    
     init(from array: [Element] = []) {
         self.representation = array
     }
@@ -23,6 +27,7 @@ class Stack<Element> {
         self.representation.append(element)
     }
     
+    @discardableResult
     func pop() -> Element? {
         return self.representation.popLast()
     }
