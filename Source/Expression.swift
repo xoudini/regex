@@ -146,6 +146,8 @@ struct Expression: ExpressionConvertible {
                 stack.push(expression)
             case "]":
                 guard context.state == .set else { throw ParsingError.invalidSymbol }
+                context.exit()
+                break loop
             case ".":
                 stack.push(AnyCharacterExpression())
             case "+":
