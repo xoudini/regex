@@ -15,6 +15,7 @@
 		377C919122445C3F005F4888 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C919022445C3F005F4888 /* Parser.swift */; };
 		377C919222455968005F4888 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C918E224404CC005F4888 /* Expression.swift */; };
 		377C919322455968005F4888 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C919022445C3F005F4888 /* Parser.swift */; };
+		377C919522455C5F005F4888 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377C919422455C5F005F4888 /* ParserTests.swift */; };
 		37AB2C65223CF636004171E8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB2C64223CF636004171E8 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		377C91892243FEA1005F4888 /* StackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackTests.swift; sourceTree = "<group>"; };
 		377C918E224404CC005F4888 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		377C919022445C3F005F4888 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		377C919422455C5F005F4888 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		37AB2C61223CF636004171E8 /* regex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = regex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AB2C64223CF636004171E8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +67,7 @@
 			children = (
 				377C917A2243E6EF005F4888 /* RegexTests.swift */,
 				377C91892243FEA1005F4888 /* StackTests.swift */,
+				377C919422455C5F005F4888 /* ParserTests.swift */,
 				377C917C2243E6EF005F4888 /* Info.plist */,
 			);
 			path = Tests;
@@ -197,6 +200,7 @@
 			files = (
 				377C919222455968005F4888 /* Expression.swift in Sources */,
 				377C919322455968005F4888 /* Parser.swift in Sources */,
+				377C919522455C5F005F4888 /* ParserTests.swift in Sources */,
 				377C918D2243FF4E005F4888 /* Stack.swift in Sources */,
 				377C918A2243FEA1005F4888 /* StackTests.swift in Sources */,
 				377C917B2243E6EF005F4888 /* RegexTests.swift in Sources */,
