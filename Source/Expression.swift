@@ -4,13 +4,19 @@
 
 import Foundation
 
-protocol Expression {
+typealias Provider = (() throws -> Character?)
+
+protocol Consumer {
+    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible
 }
 
-struct AnyCharacterExpression: Expression {
+protocol ExpressionConvertible {
 }
 
-struct CharacterExpression: Expression {
+struct AnyCharacterExpression: ExpressionConvertible {
+}
+
+struct CharacterExpression: ExpressionConvertible {
     let character: Character
     
     init(_ character: Character) {
@@ -18,96 +24,134 @@ struct CharacterExpression: Expression {
     }
 }
 
-struct CharacterSetExpression: Expression {
+struct CharacterSetExpression: ExpressionConvertible {
     let characterSet: Set<Character>
     
-    init(_ string: inout String) {
-        var characterSet = Set<Character>()
-        
-        while let character = string.first, string.removeFirst() != "]" {
-            characterSet.insert(character)
-        }
-        
+    init(with characterSet: Set<Character>) {
         self.characterSet = characterSet
     }
-}
-
-struct OptionalExpression: Expression {
-    let inner: Expression
     
-    init(_ inner: Expression) {
-        self.inner = inner
-    }
-}
-
-struct RepeatingExpression: Expression {
-    let inner: Expression
-    
-    init(_ inner: Expression) {
-        self.inner = inner
-    }
-}
-
-struct UnionExpression: Expression {
-    let alternatives: [Expression]
-    
-    init(_ alternatives: Expression...) {
-        self.alternatives = alternatives
-    }
-}
-
-struct GroupExpression: Expression {
-    let children: [Expression]
-    
-    var reduced: Expression? {
-        guard self.children.count == 1, let first = self.children.first else { return nil }
-        return first
-    }
-    
-    init(_ string: inout String) {
-        let stack = Stack<Expression>()
+    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
+        context.enter(state: .set)
         
-        while let character = string.first, string.removeFirst() != ")" {
+        var characterSet: Set<Character> = Set()
+        
+        while let character = try provider() {
             switch character {
+            case "]":
+                context.exit()
+                guard !characterSet.isEmpty else { throw ParsingError.emptyExpression }
+                return CharacterSetExpression(with: characterSet)
+            default:
+                characterSet.insert(character)
+            }
+        }
+        
+        throw ParsingError.unterminatedState
+    }
+}
+
+struct OptionalExpression: ExpressionConvertible {
+    let inner: ExpressionConvertible
+    
+    init(_ inner: ExpressionConvertible) {
+        self.inner = inner
+    }
+}
+
+struct RepeatingExpression: ExpressionConvertible {
+    let inner: ExpressionConvertible
+    
+    init(_ inner: ExpressionConvertible) {
+        self.inner = inner
+    }
+}
+
+struct UnionExpression: ExpressionConvertible {
+    let alternatives: [ExpressionConvertible]
+    
+    init(_ alternatives: ExpressionConvertible...) {
+        self.alternatives = alternatives.reduce(into: []) { (accumulator, next) in
+            if let expression = next as? UnionExpression {
+                accumulator.append(contentsOf: expression.alternatives)
+            } else {
+                accumulator.append(next)
+            }
+        }
+    }
+}
+
+struct GroupExpression: ExpressionConvertible {
+    let children: [ExpressionConvertible]
+    
+    init(with children: [ExpressionConvertible]) {
+        self.children = children
+    }
+    
+    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
+        context.enter(state: .group)
+        
+        let interceptor: Provider = {
+            guard let character = try provider() else { throw ParsingError.unterminatedState }
+            switch character {
+            case ")":
+                context.exit()
+                return nil
+            default:
+                return character
+            }
+        }
+        
+        return try Expression.consume(provider: interceptor, with: context)
+    }
+}
+
+struct Expression: ExpressionConvertible {
+    
+    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
+        let stack: Stack<ExpressionConvertible> = Stack()
+        
+        while let character = try provider() {
+            switch character {
+            case "(":
+                let expression = try GroupExpression.consume(provider: provider, with: context)
+                stack.push(expression)
+            case "[":
+                let expression = try CharacterSetExpression.consume(provider: provider, with: context)
+                stack.push(expression)
+            case ")", "]":
+                throw ParsingError.invalidSymbol
             case ".":
                 stack.push(AnyCharacterExpression())
-            case "(":
-                stack.push(GroupExpression(&string))
-            case "[":
-                stack.push(CharacterSetExpression(&string))
             case "+":
-                let expression = stack.pop()!
+                guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
                 stack.push(expression)
                 stack.push(RepeatingExpression(expression))
             case "*":
-                let expression = stack.pop()!
+                guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
                 stack.push(RepeatingExpression(expression))
             case "?":
-                let expression = stack.pop()!
+                guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
                 stack.push(OptionalExpression(expression))
-
             case "|":
-                let union = UnionExpression(GroupExpression(with: stack.representation), GroupExpression(&string))
+                let expression = UnionExpression(
+                    stack.count == 1 ? stack.first! : GroupExpression(with: stack.representation),
+                    try Expression.consume(provider: provider, with: context)
+                )
                 stack.clear()
-                stack.push(union)
+                stack.push(expression)
             default:
                 stack.push(CharacterExpression(character))
             }
         }
         
-        self.children = stack.representation
-    }
-    
-    init(with children: [Expression]) {
-        self.children = children
-    }
-}
-
-struct ExpressionTree {
-    let root: Expression
-    
-    init(with regex: String) {
-        var copy = regex
-        self.root = GroupExpression(&copy)
+        switch stack.count {
+        case 0:
+            throw ParsingError.emptyExpression
+        case 1:
+            return stack.first!
+        default:
+            return GroupExpression(with: stack.representation)
+        }
     }
 }
