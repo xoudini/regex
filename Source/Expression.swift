@@ -4,18 +4,27 @@
 
 import Foundation
 
+/// Closure type for passing a single character to a consumer.
+///
 typealias Provider = (() throws -> Character?)
 
-protocol Consumer {
-    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible
-}
 
+/// Protocol for expression type conformance.
+///
 protocol ExpressionConvertible {
 }
 
+
+/// An expression matching any literal character.
+///
+/// - note:     Represented by the `.` literal.
+///
 struct AnyCharacterExpression: ExpressionConvertible {
 }
 
+
+/// An expression matching some specific literal character.
+///
 struct CharacterExpression: ExpressionConvertible {
     let character: Character
     
@@ -24,6 +33,11 @@ struct CharacterExpression: ExpressionConvertible {
     }
 }
 
+
+/// An expression matching a character in a given set.
+///
+/// - note:     Represented by the `[...]` expression.
+///
 struct CharacterSetExpression: ExpressionConvertible {
     let characterSet: Set<Character>
     
@@ -51,6 +65,11 @@ struct CharacterSetExpression: ExpressionConvertible {
     }
 }
 
+
+/// An expression encapsulating another expression, which is optionally matched.
+///
+/// - note:     Represented by the `?` literal.
+///
 struct OptionalExpression: ExpressionConvertible {
     let inner: ExpressionConvertible
     
@@ -59,6 +78,11 @@ struct OptionalExpression: ExpressionConvertible {
     }
 }
 
+
+/// An expression encapsulating another expression, which is optionally matched repeatedly.
+///
+/// - note:     Represented by the `*` literal.
+///
 struct RepeatingExpression: ExpressionConvertible {
     let inner: ExpressionConvertible
     
@@ -67,6 +91,11 @@ struct RepeatingExpression: ExpressionConvertible {
     }
 }
 
+
+/// An expression encapsulating a number of subexpressions, which are conditionally matched.
+///
+/// - note:     Represented by the `...|...` expression.
+///
 struct UnionExpression: ExpressionConvertible {
     let alternatives: [ExpressionConvertible]
     
@@ -81,6 +110,11 @@ struct UnionExpression: ExpressionConvertible {
     }
 }
 
+
+/// An expression encapsulating a number of subexpressions, which are matched in succession.
+///
+/// - note:     Represented by the `(...)` expression.
+///
 struct GroupExpression: ExpressionConvertible {
     let children: [ExpressionConvertible]
     
@@ -89,6 +123,9 @@ struct GroupExpression: ExpressionConvertible {
     }
 }
 
+
+/// Work in progress -- currently only responsible for generating the parse tree.
+///
 struct Expression: ExpressionConvertible {
     
     static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {

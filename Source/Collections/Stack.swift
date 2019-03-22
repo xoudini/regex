@@ -4,38 +4,71 @@
 
 import Foundation
 
+/// A simple generic stack implementation.
+///
 class Stack<Element> {
+    /// The internal representation of the stack.
+    ///
+    /// - todo:     Replace with custom array type.
+    ///
     private(set) var representation: [Element]
     
+    /// The current count of elements in the stack.
     var count: Int {
         return self.representation.count
     }
     
+    /// The current top element in the stack.
+    ///
+    /// - note:     `nil` if the stack is empty.
+    ///
     var peek: Element? {
         return self.representation.last
     }
     
+    /// Designated initializer.
+    ///
+    /// - parameters:
+    ///   - array:  An `Array<Element>` to copy.
+    ///
     init(from array: [Element] = []) {
         self.representation = array
     }
     
+    /// Initializer required by `ExpressibleByArrayLiteral`.
+    ///
     required init(arrayLiteral elements: ArrayLiteralElement...) {
         self.representation = elements
     }
     
+    /// Pushes an element onto the stack.
+    ///
+    /// - parameters:
+    ///   - element:    The element to push onto stack.
+    ///
     func push(_ element: Element) {
         self.representation.append(element)
     }
     
+    /// Pops the top element off the stack.
+    ///
+    /// - returns:  The top element from the stack, or `nil`
+    ///             if the stack is empty.
+    ///
     @discardableResult
     func pop() -> Element? {
         return self.representation.popLast()
     }
     
+    /// Resets the stack into an empty state.
+    ///
     func clear() {
         self.representation.removeAll()
     }
 }
+
+
+// MARK: - Collection
 
 extension Stack: Collection {
     typealias Index = Array<Element>.Index
@@ -59,6 +92,9 @@ extension Stack: Collection {
     }
 }
 
+
+// MARK: - Sequence
+
 extension Stack: Sequence {
     
     struct Iterator: IteratorProtocol {
@@ -81,6 +117,9 @@ extension Stack: Sequence {
         return Iterator(self)
     }
 }
+
+
+// MARK: - ExpressibleByArrayLiteral
 
 extension Stack: ExpressibleByArrayLiteral {
     typealias ArrayLiteralElement = Element
