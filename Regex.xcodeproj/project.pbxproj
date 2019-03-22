@@ -81,6 +81,15 @@
 			path = Collections;
 			sourceTree = "<group>";
 		};
+		377C919622457EB2005F4888 /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				377C919022445C3F005F4888 /* Parser.swift */,
+				377C918E224404CC005F4888 /* Expression.swift */,
+			);
+			path = Parsing;
+			sourceTree = "<group>";
+		};
 		37AB2C58223CF636004171E8 = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				37AB2C64223CF636004171E8 /* main.swift */,
-				377C918E224404CC005F4888 /* Expression.swift */,
-				377C919022445C3F005F4888 /* Parser.swift */,
+				377C919622457EB2005F4888 /* Parsing */,
 				377C91862243EE59005F4888 /* Collections */,
 			);
 			path = Source;
