@@ -87,23 +87,6 @@ struct GroupExpression: ExpressionConvertible {
     init(with children: [ExpressionConvertible]) {
         self.children = children
     }
-    
-    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
-        context.enter(state: .group)
-        
-        let interceptor: Provider = {
-            guard let character = try provider() else { throw ParsingError.unterminatedState }
-            switch character {
-            case ")":
-                context.exit()
-                return nil
-            default:
-                return character
-            }
-        }
-        
-        return try Expression.consume(provider: interceptor, with: context)
-    }
 }
 
 struct Expression: ExpressionConvertible {
@@ -111,16 +94,21 @@ struct Expression: ExpressionConvertible {
     static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
         let stack: Stack<ExpressionConvertible> = Stack()
         
-        while let character = try provider() {
+        loop: while let character = try provider() {
             switch character {
             case "(":
-                let expression = try GroupExpression.consume(provider: provider, with: context)
+                context.enter(state: .group)
+                let expression = try Expression.consume(provider: provider, with: context)
                 stack.push(expression)
+            case ")":
+                guard context.state == .group else { throw ParsingError.invalidSymbol }
+                context.exit()
+                break loop
             case "[":
                 let expression = try CharacterSetExpression.consume(provider: provider, with: context)
                 stack.push(expression)
-            case ")", "]":
-                throw ParsingError.invalidSymbol
+            case "]":
+                guard context.state == .set else { throw ParsingError.invalidSymbol }
             case ".":
                 stack.push(AnyCharacterExpression())
             case "+":
