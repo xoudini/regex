@@ -11,17 +11,56 @@ typealias Provider = (() throws -> Character?)
 
 /// Protocol for expression type conformance.
 ///
-protocol ExpressionConvertible {
+protocol ExpressionConvertible: NFAConvertible {
 }
 
+
+/// Protocol for expressions directly convertible into `Symbol` instances.
+///
+protocol SymbolConvertible: NFAConvertible {
+    var symbol: Symbol { get }
+}
+
+extension SymbolConvertible {
+    
+    /// Default implementation for types conforming to `SymbolConvertible`.
+    ///
+    /// - parameters:
+    ///   - states:     A tuple of `State` instances.
+    ///
+    func insert(between states: (State, State)) {
+        let (initial, terminal) = states
+        let state = State()
+        initial.add(Transition(to: state, matching: self.symbol))
+        state.add(Transition(to: terminal))
+    }
+}
+
+
+/// Protocol for expression types containing convertible expressions.
+///
+protocol NFAConvertible {
+    func insert(between states: (State, State))
+}
+
+
+// MARK: -
 
 /// An expression matching any literal character.
 ///
 /// - note:     Represented by the `.` literal.
 ///
-struct AnyCharacterExpression: ExpressionConvertible {
+struct AnyCharacterExpression: ExpressionConvertible { }
+
+extension AnyCharacterExpression: SymbolConvertible {
+    
+    var symbol: Symbol {
+        return .any
+    }
 }
 
+
+// MARK: -
 
 /// An expression matching some specific literal character.
 ///
@@ -33,6 +72,15 @@ struct CharacterExpression: ExpressionConvertible {
     }
 }
 
+extension CharacterExpression: SymbolConvertible {
+    
+    var symbol: Symbol {
+        return .single(self.character)
+    }
+}
+
+
+// MARK: -
 
 /// An expression matching a character in a given set.
 ///
@@ -65,6 +113,15 @@ struct CharacterSetExpression: ExpressionConvertible {
     }
 }
 
+extension CharacterSetExpression: SymbolConvertible {
+    
+    var symbol: Symbol {
+        return .set(self.characterSet)
+    }
+}
+
+
+// MARK: -
 
 /// An expression encapsulating another expression, which is optionally matched.
 ///
@@ -78,6 +135,23 @@ struct OptionalExpression: ExpressionConvertible {
     }
 }
 
+extension OptionalExpression: NFAConvertible {
+    
+    func insert(between states: (State, State)) {
+        let (initial, terminal) = states
+        let nfa = NFA(from: self.inner)
+        
+        // Default transitions
+        initial.add(Transition(to: nfa.states.initial))
+        nfa.states.terminal.add(Transition(to: terminal))
+        
+        // Handle optional case
+        initial.add(Transition(to: terminal))
+    }
+}
+
+
+// MARK: -
 
 /// An expression encapsulating another expression, which is optionally matched repeatedly.
 ///
@@ -91,6 +165,26 @@ struct RepeatingExpression: ExpressionConvertible {
     }
 }
 
+extension RepeatingExpression: NFAConvertible {
+    
+    func insert(between states: (State, State)) {
+        let (initial, terminal) = states
+        let nfa = NFA(from: self.inner)
+        
+        // Default transitions
+        initial.add(Transition(to: nfa.states.initial))
+        nfa.states.terminal.add(Transition(to: terminal))
+        
+        // Handle optional case
+        initial.add(Transition(to: terminal))
+        
+        // Handle repeating case
+        nfa.states.terminal.add(Transition(to: nfa.states.initial))
+    }
+}
+
+
+// MARK: -
 
 /// An expression encapsulating a number of subexpressions, which are conditionally matched.
 ///
@@ -110,6 +204,23 @@ struct UnionExpression: ExpressionConvertible {
     }
 }
 
+extension UnionExpression: NFAConvertible {
+    
+    func insert(between states: (State, State)) {
+        let (initial, terminal) = states
+        guard let first = self.alternatives.first else { fatalError() }
+        let nfa = self.alternatives.dropFirst().reduce(into: NFA(from: first)) { (nfa, expression) in
+            nfa.union(with: NFA(from: expression))
+        }
+        
+        // Default transitions
+        initial.add(Transition(to: nfa.states.initial))
+        nfa.states.terminal.add(Transition(to: terminal))
+    }
+}
+
+
+// MARK: -
 
 /// An expression encapsulating a number of subexpressions, which are matched in succession.
 ///
@@ -123,10 +234,27 @@ struct GroupExpression: ExpressionConvertible {
     }
 }
 
+extension GroupExpression: NFAConvertible {
+    
+    func insert(between states: (State, State)) {
+        let (initial, terminal) = states
+        guard let first = self.children.first else { fatalError() }
+        let nfa = self.children.dropFirst().reduce(into: NFA(from: first)) { (nfa, expression) in
+            nfa.concatenate(with: NFA(from: expression))
+        }
+        
+        // Default transitions
+        initial.add(Transition(to: nfa.states.initial))
+        nfa.states.terminal.add(Transition(to: terminal))
+    }
+}
+
+
+// MARK: -
 
 /// Work in progress -- currently only responsible for generating the parse tree.
 ///
-struct Expression: ExpressionConvertible {
+struct Expression {
     
     static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
         let stack: Stack<ExpressionConvertible> = Stack()
