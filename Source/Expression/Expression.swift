@@ -40,6 +40,12 @@ extension SymbolConvertible {
 /// Protocol for expression types containing convertible expressions.
 ///
 protocol NFAConvertible {
+    
+    /// Method for inserting an `NFA` between two states.
+    ///
+    /// - parameters:
+    ///   - states:     A tuple of `State` instances.
+    ///
     func insert(between states: (State, State))
 }
 
