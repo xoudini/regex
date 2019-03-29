@@ -17,6 +17,9 @@ class NFATests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    
+    // MARK: - Simple construction
 
     func testEmptyNFA() {
         let nfa = NFA()
@@ -158,5 +161,196 @@ class NFATests: XCTestCase {
         XCTAssertTrue(nfa.matches(" "))
         XCTAssertFalse(nfa.matches(""))
         XCTAssertFalse(nfa.matches("ab"))
+    }
+    
+    
+    // MARK: - Expression conversion
+    
+    func testSimpleExpression() {
+        let parser = Parser(with: "abcd")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcd"))
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("abc"))
+        XCTAssertFalse(nfa.matches("bcd"))
+        XCTAssertFalse(nfa.matches("aacd"))
+        XCTAssertFalse(nfa.matches("abdd"))
+        XCTAssertFalse(nfa.matches("abcdd"))
+        XCTAssertFalse(nfa.matches("aabcd"))
+    }
+    
+    func testAnyCharacterExpression() {
+        let parser = Parser(with: "x.z")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("xaz"))
+        XCTAssertTrue(nfa.matches("x z"))
+        XCTAssertTrue(nfa.matches("x9z"))
+        XCTAssertTrue(nfa.matches("xöz"))
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("xz"))
+    }
+    
+    func testCharacterSetExpression() {
+        let parser = Parser(with: "x[123]z")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("x1z"))
+        XCTAssertTrue(nfa.matches("x2z"))
+        XCTAssertTrue(nfa.matches("x3z"))
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("xz"))
+        XCTAssertFalse(nfa.matches("xaz"))
+        XCTAssertFalse(nfa.matches("xyz"))
+        XCTAssertFalse(nfa.matches("xxz"))
+        XCTAssertFalse(nfa.matches("xzz"))
+        XCTAssertFalse(nfa.matches("x1zz"))
+    }
+    
+    func testUnionExpression() {
+        let parser = Parser(with: "abcd|xyz")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcd"))
+        XCTAssertTrue(nfa.matches("xyz"))
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("xya"))
+        XCTAssertFalse(nfa.matches("xyb"))
+        XCTAssertFalse(nfa.matches("xyc"))
+        XCTAssertFalse(nfa.matches("xyd"))
+        XCTAssertFalse(nfa.matches("ayz"))
+        XCTAssertFalse(nfa.matches("abz"))
+        XCTAssertFalse(nfa.matches("abyz"))
+        XCTAssertFalse(nfa.matches("abcz"))
+    }
+    
+    func testOptionalExpression() {
+        let parser = Parser(with: "(abcd)?")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcd"))
+        XCTAssertTrue(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("abcdabcd"))
+        XCTAssertFalse(nfa.matches("abcdabcdabcd"))
+        XCTAssertFalse(nfa.matches("abc"))
+        XCTAssertFalse(nfa.matches("abcda"))
+        XCTAssertFalse(nfa.matches("dabcd"))
+        XCTAssertFalse(nfa.matches("aaaa"))
+        XCTAssertFalse(nfa.matches("dddd"))
+    }
+    
+    func testKleeneStarExpression() {
+        let parser = Parser(with: "(abcd)*")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcd"))
+        XCTAssertTrue(nfa.matches("abcdabcd"))
+        XCTAssertTrue(nfa.matches("abcdabcdabcd"))
+        XCTAssertTrue(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("abc"))
+        XCTAssertFalse(nfa.matches("abcda"))
+        XCTAssertFalse(nfa.matches("dabcd"))
+        XCTAssertFalse(nfa.matches("aaaa"))
+        XCTAssertFalse(nfa.matches("dddd"))
+    }
+    
+    func testPlusExpression() {
+        let parser = Parser(with: "(abcd)+")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcd"))
+        XCTAssertTrue(nfa.matches("abcdabcd"))
+        XCTAssertTrue(nfa.matches("abcdabcdabcd"))
+        XCTAssertFalse(nfa.matches(""))
+    }
+    
+    func testComplexExpression1() {
+        let parser = Parser(with: "(ab)+|[xyz]+")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("ab"))
+        XCTAssertTrue(nfa.matches("abab"))
+        XCTAssertTrue(nfa.matches("ababab"))
+        
+        XCTAssertTrue(nfa.matches("x"))
+        XCTAssertTrue(nfa.matches("xx"))
+        XCTAssertTrue(nfa.matches("y"))
+        XCTAssertTrue(nfa.matches("yy"))
+        XCTAssertTrue(nfa.matches("z"))
+        XCTAssertTrue(nfa.matches("zz"))
+        XCTAssertTrue(nfa.matches("xzyxz"))
+        
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("abx"))
+        XCTAssertFalse(nfa.matches("xab"))
+        XCTAssertFalse(nfa.matches("abxzz"))
+    }
+    
+    func testComplexExpression2() {
+        let parser = Parser(with: "abc.*def")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abcdef"))
+        XCTAssertTrue(nfa.matches("abc-def"))
+        XCTAssertTrue(nfa.matches("abc--def"))
+        XCTAssertTrue(nfa.matches("abc-----------------------------------------------def"))
+        
+        XCTAssertFalse(nfa.matches(""))
+    }
+    
+    func testComplexExpression3() {
+        let parser = Parser(with: "a[xyz]+x.?")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("axx"))
+        XCTAssertTrue(nfa.matches("axxx"))
+        XCTAssertTrue(nfa.matches("axxs"))
+        XCTAssertTrue(nfa.matches("ayxs"))
+        XCTAssertTrue(nfa.matches("azyzx"))
+        XCTAssertTrue(nfa.matches("azyzxs"))
+        XCTAssertTrue(nfa.matches("axxxxxxxxxxxxxxxxxxxxxxx"))
+        
+        XCTAssertFalse(nfa.matches(""))
+        XCTAssertFalse(nfa.matches("azyzs"))
+        XCTAssertFalse(nfa.matches("ayys"))
+        XCTAssertFalse(nfa.matches("xxxs"))
+    }
+    
+    func testReDoSExpression1() {
+        let parser = Parser(with: "(a+)+")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("a"))
+        XCTAssertTrue(nfa.matches("aaa"))
+        XCTAssertTrue(nfa.matches("aaaaaaaaa"))
+        
+        XCTAssertFalse(nfa.matches(""))
+        
+        self.measure {
+            XCTAssertTrue(nfa.matches("aaaaaaaaaaaaaaa"))
+        }
     }
 }
