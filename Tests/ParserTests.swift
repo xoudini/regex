@@ -55,35 +55,35 @@ class ParserTests: XCTestCase {
         XCTAssertEqual(character, "a")
     }
     
-    func testRepeatingExpression() {
+    func testRepeatedExpression() {
         let parser = Parser(with: "b*")
         
         XCTAssertNotNil(parser.result)
-        XCTAssert(parser.result is RepeatingExpression)
+        XCTAssert(parser.result is RepeatedExpression)
         
-        let result = parser.result as! RepeatingExpression
+        let result = parser.result as! RepeatedExpression
         XCTAssert(result.inner is CharacterExpression)
         
         let character = (result.inner as! CharacterExpression).character
         XCTAssertEqual(character, "b")
     }
     
-    func testRepeatingPlusOneExpression() {
+    func testRepeatedPlusOneExpression() {
         let parser = Parser(with: "c+")
         
         XCTAssertNotNil(parser.result)
-        XCTAssert(parser.result is GroupExpression)
+        XCTAssert(parser.result is ConcatenatedExpression)
         
-        let result = parser.result as! GroupExpression
+        let result = parser.result as! ConcatenatedExpression
         XCTAssertEqual(result.children.count, 2)
         XCTAssert(result.children.first is CharacterExpression)
-        XCTAssert(result.children.last is RepeatingExpression)
+        XCTAssert(result.children.last is RepeatedExpression)
         
         let character = (result.children.first as! CharacterExpression).character
         XCTAssertEqual(character, "c")
         
-        let repeating = result.children.last as! RepeatingExpression
-        let innerCharacter = (repeating.inner as! CharacterExpression).character
+        let repeated = result.children.last as! RepeatedExpression
+        let innerCharacter = (repeated.inner as! CharacterExpression).character
         XCTAssertEqual(character, innerCharacter)
     }
     
@@ -101,13 +101,13 @@ class ParserTests: XCTestCase {
         XCTAssertEqual(alternatives[2], "c")
     }
     
-    func testGroupExpression() {
+    func testConcatenatedExpression() {
         let parser = Parser(with: "(ab)")
         
         XCTAssertNotNil(parser.result)
-        XCTAssert(parser.result is GroupExpression)
+        XCTAssert(parser.result is ConcatenatedExpression)
         
-        let group = parser.result as! GroupExpression
+        let group = parser.result as! ConcatenatedExpression
         XCTAssertEqual(group.children.count, 2)
         
         
