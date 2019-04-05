@@ -29,13 +29,13 @@ class ParserTests: XCTestCase {
         XCTAssert(parser.result is CharacterExpression)
     }
     
-    func testCharacterSetExpression() {
+    func testChoiceExpression() {
         let parser = Parser(with: "[abc]")
         
         XCTAssertNotNil(parser.result)
-        XCTAssert(parser.result is CharacterSetExpression)
+        XCTAssert(parser.result is ChoiceExpression)
         
-        let characterSet = (parser.result as! CharacterSetExpression).characterSet
+        let characterSet = (parser.result as! ChoiceExpression).characterSet
         XCTAssert(characterSet.contains("a"))
         XCTAssert(characterSet.contains("b"))
         XCTAssert(characterSet.contains("c"))
