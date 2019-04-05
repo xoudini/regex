@@ -80,21 +80,17 @@ class NFA {
     /// - returns:      A boolean value, depending on whether the input was matched.
     ///
     func matches(_ input: String) -> Bool {
-        var queue: [State] = [self.states.initial]
+        let queue: Queue<State> = [self.states.initial]
         
         for character in input {
             var remaining = queue.count
             
-            while remaining != 0 {
-                let state = queue.removeFirst()
+            while remaining != 0, let state = queue.dequeue() {
                 remaining -= 1
-                
-                queue.append(contentsOf: state.destinations(from: character))
+                queue.enqueue(contentsOf: state.destinations(from: character))
             }
         }
         
-        return queue.lazy
-            .flatMap { $0.closure }
-            .contains { state in state === self.states.terminal }
+        return queue.flatMap{ $0.closure }.contains{ state in state === self.states.terminal }
     }
 }
