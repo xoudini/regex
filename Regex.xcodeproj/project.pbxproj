@@ -51,6 +51,8 @@
 		37D73DAC2257C28F00BD94F0 /* UnionExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DA32257C1DD00BD94F0 /* UnionExpression.swift */; };
 		37D73DAD2257C28F00BD94F0 /* ConcatenatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DA52257C20000BD94F0 /* ConcatenatedExpression.swift */; };
 		37D73DAF2257D2A100BD94F0 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DAE2257D2A100BD94F0 /* QueueTests.swift */; };
+		37D73DB12257EA5F00BD94F0 /* UnsafeMutablePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DB02257EA5F00BD94F0 /* UnsafeMutablePointer.swift */; };
+		37D73DB32257EF9000BD94F0 /* UnsafeMutablePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DB02257EA5F00BD94F0 /* UnsafeMutablePointer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +96,7 @@
 		37D73DA32257C1DD00BD94F0 /* UnionExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionExpression.swift; sourceTree = "<group>"; };
 		37D73DA52257C20000BD94F0 /* ConcatenatedExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenatedExpression.swift; sourceTree = "<group>"; };
 		37D73DAE2257D2A100BD94F0 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		37D73DB02257EA5F00BD94F0 /* UnsafeMutablePointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeMutablePointer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,7 @@
 				377C919622457EB2005F4888 /* Parsing */,
 				37D73D84224E988300BD94F0 /* NFA */,
 				377C91862243EE59005F4888 /* Collections */,
+				37D73DB22257EA6600BD94F0 /* Extensions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -210,6 +214,14 @@
 				37D73DA52257C20000BD94F0 /* ConcatenatedExpression.swift */,
 			);
 			path = Expression;
+			sourceTree = "<group>";
+		};
+		37D73DB22257EA6600BD94F0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37D73DB02257EA5F00BD94F0 /* UnsafeMutablePointer.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D73DB32257EF9000BD94F0 /* UnsafeMutablePointer.swift in Sources */,
 				37D73DA72257C28F00BD94F0 /* AnyCharacterExpression.swift in Sources */,
 				37D73DA82257C28F00BD94F0 /* CharacterExpression.swift in Sources */,
 				37D73DA92257C28F00BD94F0 /* ChoiceExpression.swift in Sources */,
@@ -353,6 +366,7 @@
 				37D73DA42257C1DD00BD94F0 /* UnionExpression.swift in Sources */,
 				37D73D86224E98BD00BD94F0 /* State.swift in Sources */,
 				37D73DA02257C1A000BD94F0 /* OptionalExpression.swift in Sources */,
+				37D73DB12257EA5F00BD94F0 /* UnsafeMutablePointer.swift in Sources */,
 				37D73D9C2257C10900BD94F0 /* CharacterExpression.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
