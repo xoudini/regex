@@ -34,6 +34,8 @@
 		37D73D9322575CA700BD94F0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D9222575CA700BD94F0 /* Queue.swift */; };
 		37D73D9422575EFB00BD94F0 /* UnsafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D902250474800BD94F0 /* UnsafeArray.swift */; };
 		37D73D9522575EFB00BD94F0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D9222575CA700BD94F0 /* Queue.swift */; };
+		37D73D972257B3D800BD94F0 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D962257B3D800BD94F0 /* Provider.swift */; };
+		37D73D982257B86600BD94F0 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D962257B3D800BD94F0 /* Provider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +70,7 @@
 		37D73D8A224E99EB00BD94F0 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		37D73D902250474800BD94F0 /* UnsafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeArray.swift; sourceTree = "<group>"; };
 		37D73D9222575CA700BD94F0 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		37D73D962257B3D800BD94F0 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,7 @@
 			children = (
 				377C919022445C3F005F4888 /* Parser.swift */,
 				377C919722457F09005F4888 /* ParserContext.swift */,
+				37D73D962257B3D800BD94F0 /* Provider.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -268,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D73D982257B86600BD94F0 /* Provider.swift in Sources */,
 				37D73D9422575EFB00BD94F0 /* UnsafeArray.swift in Sources */,
 				37D73D9522575EFB00BD94F0 /* Queue.swift in Sources */,
 				37D73D8C224E9B7B00BD94F0 /* Expression.swift in Sources */,
@@ -299,6 +304,7 @@
 				37D73D912250474800BD94F0 /* UnsafeArray.swift in Sources */,
 				37D73D9322575CA700BD94F0 /* Queue.swift in Sources */,
 				377C91852243EE53005F4888 /* Stack.swift in Sources */,
+				37D73D972257B3D800BD94F0 /* Provider.swift in Sources */,
 				37AB2C65223CF636004171E8 /* main.swift in Sources */,
 				377C918F224404CC005F4888 /* Expression.swift in Sources */,
 				37D73D86224E98BD00BD94F0 /* State.swift in Sources */,

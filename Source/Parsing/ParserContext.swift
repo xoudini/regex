@@ -14,6 +14,7 @@ class ParserContext {
         case none
         case escaped
         case group
+        case union
         case set
     }
     

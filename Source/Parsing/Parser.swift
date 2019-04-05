@@ -38,8 +38,7 @@ class Parser {
     /// - returns:  The root of the resulting parse tree.
     ///
     func parse() throws -> ExpressionConvertible {
-        var iterator = self.regex.makeIterator()
-        let provider: Provider = { iterator.next() }
+        let provider = Provider(self.regex)
         let expression = try Expression.consume(provider: provider, with: self.context)
         guard case .none = self.context.state else { throw ParsingError.invalidEndState }
         return expression

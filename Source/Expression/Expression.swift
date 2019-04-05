@@ -4,14 +4,10 @@
 
 import Foundation
 
-/// Closure type for passing a single character to a consumer.
-///
-typealias Provider = (() -> Character?)
-
 
 /// Protocol for expression type conformance.
 ///
-protocol ExpressionConvertible: NFAConvertible {
+protocol ExpressionConvertible: NFAConvertible, CustomStringConvertible {
 }
 
 
@@ -65,6 +61,13 @@ extension AnyCharacterExpression: SymbolConvertible {
     }
 }
 
+extension AnyCharacterExpression: CustomStringConvertible {
+    
+    var description: String {
+        return "Any"
+    }
+}
+
 
 // MARK: -
 
@@ -85,6 +88,13 @@ extension CharacterExpression: SymbolConvertible {
     }
 }
 
+extension CharacterExpression: CustomStringConvertible {
+    
+    var description: String {
+        return self.character.description
+    }
+}
+
 
 // MARK: -
 
@@ -93,29 +103,10 @@ extension CharacterExpression: SymbolConvertible {
 /// - note:     Represented by the `[...]` expression.
 ///
 struct CharacterSetExpression: ExpressionConvertible {
-    let characterSet: Set<Character>
+    var characterSet: Set<Character>
     
     init(with characterSet: Set<Character>) {
         self.characterSet = characterSet
-    }
-    
-    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
-        context.enter(state: .set)
-        
-        var characterSet: Set<Character> = Set()
-        
-        while let character = provider() {
-            switch character {
-            case "]":
-                context.exit()
-                guard !characterSet.isEmpty else { throw ParsingError.emptyExpression }
-                return CharacterSetExpression(with: characterSet)
-            default:
-                characterSet.insert(character)
-            }
-        }
-        
-        throw ParsingError.unterminatedState
     }
 }
 
@@ -123,6 +114,14 @@ extension CharacterSetExpression: SymbolConvertible {
     
     var symbol: Symbol {
         return .set(self.characterSet)
+    }
+}
+
+extension CharacterSetExpression: CustomStringConvertible {
+    
+    var description: String {
+        let characters = self.characterSet.map{ $0.description }.sorted().joined(separator: ", ")
+        return "Choice(\(characters))"
     }
 }
 
@@ -156,6 +155,13 @@ extension OptionalExpression: NFAConvertible {
     }
 }
 
+extension OptionalExpression: CustomStringConvertible {
+    
+    var description: String {
+        return "Optional(\(self.inner.description))"
+    }
+}
+
 
 // MARK: -
 
@@ -163,7 +169,7 @@ extension OptionalExpression: NFAConvertible {
 ///
 /// - note:     Represented by the `*` literal.
 ///
-struct RepeatingExpression: ExpressionConvertible {
+struct RepeatedExpression: ExpressionConvertible {
     let inner: ExpressionConvertible
     
     init(_ inner: ExpressionConvertible) {
@@ -171,7 +177,7 @@ struct RepeatingExpression: ExpressionConvertible {
     }
 }
 
-extension RepeatingExpression: NFAConvertible {
+extension RepeatedExpression: NFAConvertible {
     
     func insert(between states: (State, State)) {
         let (initial, terminal) = states
@@ -189,6 +195,13 @@ extension RepeatingExpression: NFAConvertible {
     }
 }
 
+extension RepeatedExpression: CustomStringConvertible {
+    
+    var description: String {
+        return "Repeated(\(self.inner.description))"
+    }
+}
+
 
 // MARK: -
 
@@ -197,7 +210,7 @@ extension RepeatingExpression: NFAConvertible {
 /// - note:     Represented by the `...|...` expression.
 ///
 struct UnionExpression: ExpressionConvertible {
-    let alternatives: [ExpressionConvertible]
+    var alternatives: [ExpressionConvertible]
     
     init(_ alternatives: ExpressionConvertible...) {
         self.alternatives = alternatives.reduce(into: []) { (accumulator, next) in
@@ -207,6 +220,10 @@ struct UnionExpression: ExpressionConvertible {
                 accumulator.append(next)
             }
         }
+    }
+    
+    mutating func append(_ expression: ExpressionConvertible) {
+        self.alternatives.append(expression)
     }
 }
 
@@ -225,6 +242,14 @@ extension UnionExpression: NFAConvertible {
     }
 }
 
+extension UnionExpression: CustomStringConvertible {
+    
+    var description: String {
+        let inner = self.alternatives.map{ $0.description }.joined(separator: ", ")
+        return "Union(\(inner))"
+    }
+}
+
 
 // MARK: -
 
@@ -232,15 +257,15 @@ extension UnionExpression: NFAConvertible {
 ///
 /// - note:     Represented by the `(...)` expression.
 ///
-struct GroupExpression: ExpressionConvertible {
-    let children: [ExpressionConvertible]
+struct ConcatenatedExpression: ExpressionConvertible {
+    var children: [ExpressionConvertible]
     
     init(with children: [ExpressionConvertible]) {
         self.children = children
     }
 }
 
-extension GroupExpression: NFAConvertible {
+extension ConcatenatedExpression: NFAConvertible {
     
     func insert(between states: (State, State)) {
         let (initial, terminal) = states
@@ -255,6 +280,14 @@ extension GroupExpression: NFAConvertible {
     }
 }
 
+extension ConcatenatedExpression: CustomStringConvertible {
+    
+    var description: String {
+        let inner = self.children.map{ $0.description }.joined(separator: ", ")
+        return "Concatenated(\(inner))"
+    }
+}
+
 
 // MARK: -
 
@@ -262,45 +295,73 @@ extension GroupExpression: NFAConvertible {
 ///
 struct Expression {
     
-    static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
+    static func consume(provider: Provider, with context: ParserContext) throws -> ExpressionConvertible {
         let stack: Stack<ExpressionConvertible> = Stack()
         
-        loop: while let character = provider() {
-            switch character {
-            case "(":
+        loop: while let character = provider.next() {
+            
+            switch (context.state, character) {
+            case (.set, "]"):
+                context.exit()
+                
+            case (.set, _):
+                var expression = stack.pop() as! CharacterSetExpression
+                expression.characterSet.insert(character)
+                stack.push(expression)
+                
+            case (.group, ")"):
+                break loop
+            
+            case (.union, ")"):
+                fallthrough
+                
+            case (.union, "|"):
+                provider.stepBack()
+                break loop
+                
+            case (_, "("):
                 context.enter(state: .group)
                 let expression = try Expression.consume(provider: provider, with: context)
-                stack.push(expression)
-            case ")":
-                guard context.state == .group else { throw ParsingError.invalidSymbol }
                 context.exit()
-                break loop
-            case "[":
-                let expression = try CharacterSetExpression.consume(provider: provider, with: context)
                 stack.push(expression)
-            case "]":
-                guard context.state == .set else { throw ParsingError.invalidSymbol }
-                context.exit()
-                break loop
-            case ".":
+                
+            case (_, "["):
+                context.enter(state: .set)
+                stack.push(CharacterSetExpression(with: []))
+                
+            case (_, "."):
                 stack.push(AnyCharacterExpression())
-            case "+":
+                
+            case (_, "+"):
                 guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
-                stack.push(expression)
-                stack.push(RepeatingExpression(expression))
-            case "*":
+                let concat = ConcatenatedExpression(with: [expression, RepeatedExpression(expression)])
+                stack.push(concat)
+                
+            case (_, "*"):
                 guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
-                stack.push(RepeatingExpression(expression))
-            case "?":
+                stack.push(RepeatedExpression(expression))
+                
+            case (_, "?"):
                 guard let expression = stack.pop() else { throw ParsingError.invalidSymbol }
                 stack.push(OptionalExpression(expression))
-            case "|":
-                let expression = UnionExpression(
-                    stack.count == 1 ? stack.first! : GroupExpression(with: stack.representation),
-                    try Expression.consume(provider: provider, with: context)
-                )
-                stack.clear()
-                stack.push(expression)
+                
+            case (_, "|"):
+                guard !stack.isEmpty else { throw ParsingError.invalidSymbol }
+                
+                context.enter(state: .union)
+                let expression = try Expression.consume(provider: provider, with: context)
+                context.exit()
+                
+                let union: UnionExpression =  {
+                    if stack.count == 1, let previous = stack.pop() {
+                        return UnionExpression(previous, expression)
+                    }
+                    defer { stack.clear() }
+                    return UnionExpression(ConcatenatedExpression(with: stack.representation), expression)
+                }()
+                
+                stack.push(union)
+                
             default:
                 stack.push(CharacterExpression(character))
             }
@@ -312,7 +373,7 @@ struct Expression {
         case 1:
             return stack.first!
         default:
-            return GroupExpression(with: stack.representation)
+            return ConcatenatedExpression(with: stack.representation)
         }
     }
 }
