@@ -31,6 +31,9 @@
 		37D73D8E224E9B7B00BD94F0 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D85224E98BD00BD94F0 /* State.swift */; };
 		37D73D8F224E9B7B00BD94F0 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D87224E98FB00BD94F0 /* Transition.swift */; };
 		37D73D912250474800BD94F0 /* UnsafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D902250474800BD94F0 /* UnsafeArray.swift */; };
+		37D73D9322575CA700BD94F0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D9222575CA700BD94F0 /* Queue.swift */; };
+		37D73D9422575EFB00BD94F0 /* UnsafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D902250474800BD94F0 /* UnsafeArray.swift */; };
+		37D73D9522575EFB00BD94F0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73D9222575CA700BD94F0 /* Queue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +67,7 @@
 		37D73D87224E98FB00BD94F0 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		37D73D8A224E99EB00BD94F0 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		37D73D902250474800BD94F0 /* UnsafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeArray.swift; sourceTree = "<group>"; };
+		37D73D9222575CA700BD94F0 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			children = (
 				37D73D902250474800BD94F0 /* UnsafeArray.swift */,
 				377C91842243EE53005F4888 /* Stack.swift */,
+				37D73D9222575CA700BD94F0 /* Queue.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -263,6 +268,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D73D9422575EFB00BD94F0 /* UnsafeArray.swift in Sources */,
+				37D73D9522575EFB00BD94F0 /* Queue.swift in Sources */,
 				37D73D8C224E9B7B00BD94F0 /* Expression.swift in Sources */,
 				37D73D8D224E9B7B00BD94F0 /* Symbol.swift in Sources */,
 				37D73D8E224E9B7B00BD94F0 /* State.swift in Sources */,
@@ -290,6 +297,7 @@
 				377C919A22457FA1005F4888 /* ParsingError.swift in Sources */,
 				377C919822457F09005F4888 /* ParserContext.swift in Sources */,
 				37D73D912250474800BD94F0 /* UnsafeArray.swift in Sources */,
+				37D73D9322575CA700BD94F0 /* Queue.swift in Sources */,
 				377C91852243EE53005F4888 /* Stack.swift in Sources */,
 				37AB2C65223CF636004171E8 /* main.swift in Sources */,
 				377C918F224404CC005F4888 /* Expression.swift in Sources */,
