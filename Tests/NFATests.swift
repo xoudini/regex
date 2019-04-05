@@ -1,9 +1,5 @@
 //
 //  NFATests.swift
-//  RegexTests
-//
-//  Created by Dan Lindholm on 29/03/2019.
-//  Copyright © 2019 Dan Lindholm. All rights reserved.
 //
 
 import XCTest
@@ -351,6 +347,38 @@ class NFATests: XCTestCase {
         
         self.measure {
             XCTAssertTrue(nfa.matches("aaaaaaaaaaaaaaa"))
+        }
+    }
+    
+    func testReDoSExpression2() {
+        let parser = Parser(with: "(a|aa)+")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("a"))
+        XCTAssertTrue(nfa.matches("aaa"))
+        XCTAssertTrue(nfa.matches("aaaaaaaaa"))
+        
+        XCTAssertFalse(nfa.matches(""))
+        
+        self.measure {
+            XCTAssertTrue(nfa.matches("aaaaaaaaaaaaaaa"))
+        }
+    }
+    
+    func testReDoSExpression3() {
+        let n = 10
+        let regex = (0..<n).map{ _ in "a?" }.joined() + (0..<n).map{ _ in "a" }.joined()
+        let input = (0..<n).map{ _ in "a" }.joined()
+        
+        let parser = Parser(with: regex)
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        self.measure {
+            XCTAssertTrue(nfa.matches(input))
         }
     }
 }

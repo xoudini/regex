@@ -50,6 +50,7 @@
 		37D73DAB2257C28F00BD94F0 /* RepeatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DA12257C1C000BD94F0 /* RepeatedExpression.swift */; };
 		37D73DAC2257C28F00BD94F0 /* UnionExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DA32257C1DD00BD94F0 /* UnionExpression.swift */; };
 		37D73DAD2257C28F00BD94F0 /* ConcatenatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DA52257C20000BD94F0 /* ConcatenatedExpression.swift */; };
+		37D73DAF2257D2A100BD94F0 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73DAE2257D2A100BD94F0 /* QueueTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +93,7 @@
 		37D73DA12257C1C000BD94F0 /* RepeatedExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatedExpression.swift; sourceTree = "<group>"; };
 		37D73DA32257C1DD00BD94F0 /* UnionExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionExpression.swift; sourceTree = "<group>"; };
 		37D73DA52257C20000BD94F0 /* ConcatenatedExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenatedExpression.swift; sourceTree = "<group>"; };
+		37D73DAE2257D2A100BD94F0 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			children = (
 				377C917A2243E6EF005F4888 /* RegexTests.swift */,
 				377C91892243FEA1005F4888 /* StackTests.swift */,
+				37D73DAE2257D2A100BD94F0 /* QueueTests.swift */,
 				377C919422455C5F005F4888 /* ParserTests.swift */,
 				37D73D80224E38ED00BD94F0 /* NFATests.swift */,
 				377C917C2243E6EF005F4888 /* Info.plist */,
@@ -188,6 +191,7 @@
 			children = (
 				37D73D7E224D80FA00BD94F0 /* NFA.swift */,
 				37D73D85224E98BD00BD94F0 /* State.swift */,
+				37D73D8A224E99EB00BD94F0 /* Symbol.swift */,
 				37D73D87224E98FB00BD94F0 /* Transition.swift */,
 			);
 			path = NFA;
@@ -197,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				377C918E224404CC005F4888 /* Expression.swift */,
-				37D73D8A224E99EB00BD94F0 /* Symbol.swift */,
 				37D73D992257C0D600BD94F0 /* AnyCharacterExpression.swift */,
 				37D73D9B2257C10900BD94F0 /* CharacterExpression.swift */,
 				37D73D9D2257C15200BD94F0 /* ChoiceExpression.swift */,
@@ -319,6 +322,7 @@
 				377C919C224580A6005F4888 /* ParsingError.swift in Sources */,
 				377C919D224580A6005F4888 /* ParserContext.swift in Sources */,
 				377C919322455968005F4888 /* Parser.swift in Sources */,
+				37D73DAF2257D2A100BD94F0 /* QueueTests.swift in Sources */,
 				377C919522455C5F005F4888 /* ParserTests.swift in Sources */,
 				377C918D2243FF4E005F4888 /* Stack.swift in Sources */,
 				377C918A2243FEA1005F4888 /* StackTests.swift in Sources */,
