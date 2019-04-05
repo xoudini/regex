@@ -28,7 +28,7 @@ Assuming the aforementioned requirements are met, the tests can be run in Xcode 
 
 ### Linux
 
-Running the tests on a Linux machine is possible, but requires some effort. Firstly, [Swift 5.0 needs to be installed][swift]. The release includes [Swift Package Manager][spm], which will be used for the `Package.swift` manifest file. The manifest file must be written to include a test target, with a dependency to all other files in the [Source][src] directory, as well as the test files in the [Tests][test] directory. After this the tests should be runnable using the commands `swift build` followed by `swift test`, in the directory containing the `Package.swift` file.
+Running the tests on a Linux machine is possible, but requires some effort. Firstly, [Swift 5.0 needs to be installed][swift]. The release includes [Swift Package Manager][spm], which will be used for the `Package.swift` manifest file. The manifest file must be written to include a test target, with a dependency to all files in the [Source][src] directory excluding `main.swift`, as well as the test files in the [Tests][test] directory. After this the tests should be runnable using the commands `swift build` followed by `swift test` in the directory containing the `Package.swift` file.
 
 Some additional tweaks may be required, including modifying each test class slightly. If time permits, the entire project will be made compatible with Ubuntu 18.04.
 
