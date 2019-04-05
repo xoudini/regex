@@ -6,7 +6,7 @@ import Foundation
 
 /// Closure type for passing a single character to a consumer.
 ///
-typealias Provider = (() throws -> Character?)
+typealias Provider = (() -> Character?)
 
 
 /// Protocol for expression type conformance.
@@ -104,7 +104,7 @@ struct CharacterSetExpression: ExpressionConvertible {
         
         var characterSet: Set<Character> = Set()
         
-        while let character = try provider() {
+        while let character = provider() {
             switch character {
             case "]":
                 context.exit()
@@ -265,7 +265,7 @@ struct Expression {
     static func consume(provider: @escaping Provider, with context: ParserContext) throws -> ExpressionConvertible {
         let stack: Stack<ExpressionConvertible> = Stack()
         
-        loop: while let character = try provider() {
+        loop: while let character = provider() {
             switch character {
             case "(":
                 context.enter(state: .group)
