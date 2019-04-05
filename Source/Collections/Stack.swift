@@ -7,6 +7,7 @@ import Foundation
 /// A simple generic stack implementation.
 ///
 class Stack<Element> {
+    
     /// The internal representation of the stack.
     ///
     /// - todo:     Replace with custom array type.
@@ -37,8 +38,8 @@ class Stack<Element> {
     
     /// Initializer required by `ExpressibleByArrayLiteral`.
     ///
-    required init(arrayLiteral elements: ArrayLiteralElement...) {
-        self.representation = elements
+    required convenience init(arrayLiteral elements: ArrayLiteralElement...) {
+        self.init(from: elements)
     }
     
     /// Pushes an element onto the stack.
@@ -103,7 +104,7 @@ extension Stack: Sequence {
         
         init(_ stack: Stack<Element>) {
             self.stack = stack
-            self.index = 0
+            self.index = stack.startIndex
         }
         
         mutating func next() -> Element? {
