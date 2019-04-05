@@ -42,7 +42,7 @@ class NFA {
     /// - parameters:
     ///   - expression: An expression, which may be a wrapper for another expression.
     ///
-    init(from expression: ExpressionConvertible) {
+    init(from expression: Expression) {
         let states = (State(category: .initial), State(category: .terminal))
         expression.insert(between: states)
         self.states = states

@@ -8,10 +8,10 @@ import Foundation
 ///
 /// - note:     Represented by the `?` literal.
 ///
-struct OptionalExpression: ExpressionConvertible {
-    let inner: ExpressionConvertible
+struct OptionalExpression: Expression {
+    let inner: Expression
     
-    init(_ inner: ExpressionConvertible) {
+    init(_ inner: Expression) {
         self.inner = inner
     }
 }

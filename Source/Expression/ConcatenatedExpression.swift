@@ -8,11 +8,15 @@ import Foundation
 ///
 /// - note:     Represented by the `(...)` expression.
 ///
-struct ConcatenatedExpression: ExpressionConvertible {
-    var children: [ExpressionConvertible]
+struct ConcatenatedExpression: Expression {
+    var children: [Expression]
     
-    init(with children: [ExpressionConvertible]) {
+    init(with children: [Expression]) {
         self.children = children
+    }
+    
+    init(_ children: Expression...) {
+        self.init(with: children)
     }
 }
 

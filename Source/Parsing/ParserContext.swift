@@ -15,7 +15,7 @@ class ParserContext {
         case escaped
         case group
         case union
-        case set
+        case choice
     }
     
     /// A stack to keep track of the states during parsing.

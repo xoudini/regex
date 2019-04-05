@@ -8,7 +8,7 @@ import Foundation
 ///
 /// - note:     Represented by the `.` literal.
 ///
-struct AnyCharacterExpression: ExpressionConvertible { }
+struct AnyCharacterExpression: Expression { }
 
 extension AnyCharacterExpression: SymbolConvertible {
     

@@ -8,10 +8,10 @@ import Foundation
 ///
 /// - note:     Represented by the `...|...` expression.
 ///
-struct UnionExpression: ExpressionConvertible {
-    var alternatives: [ExpressionConvertible]
+struct UnionExpression: Expression {
+    var alternatives: [Expression]
     
-    init(_ alternatives: ExpressionConvertible...) {
+    init(_ alternatives: Expression...) {
         self.alternatives = alternatives.reduce(into: []) { (accumulator, next) in
             if let expression = next as? UnionExpression {
                 accumulator.append(contentsOf: expression.alternatives)
@@ -21,7 +21,7 @@ struct UnionExpression: ExpressionConvertible {
         }
     }
     
-    mutating func append(_ expression: ExpressionConvertible) {
+    mutating func append(_ expression: Expression) {
         self.alternatives.append(expression)
     }
 }

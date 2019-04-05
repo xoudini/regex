@@ -8,7 +8,7 @@ import Foundation
 ///
 /// - note:     Represented by the `[...]` expression.
 ///
-struct ChoiceExpression: ExpressionConvertible {
+struct ChoiceExpression: Expression {
     var characterSet: Set<Character>
     
     init(with characterSet: Set<Character> = Set()) {

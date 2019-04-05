@@ -6,7 +6,7 @@ import Foundation
 
 /// An expression matching some specific literal character.
 ///
-struct CharacterExpression: ExpressionConvertible {
+struct CharacterExpression: Expression {
     let character: Character
     
     init(_ character: Character) {
