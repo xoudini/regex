@@ -9,14 +9,20 @@ import Foundation
 class Stack<Element> {
     
     /// The internal representation of the stack.
-    ///
-    /// - todo:     Replace with custom array type.
-    ///
-    private(set) var representation: [Element]
+    private let representation: UnsafeArray<Element>
+    
+    /// A copy of the elements in this stack.
+    var elements: UnsafeArray<Element> {
+        self.representation.align(startIndex: self.startIndex, endIndex: self.endIndex)
+        return self.representation.copy()
+    }
     
     /// The current count of elements in the stack.
-    var count: Int {
-        return self.representation.count
+    private(set) var count: Int
+    
+    /// A boolean value indicating whether the stack is empty.
+    var isEmpty: Bool {
+        return self.count == 0
     }
     
     /// The current top element in the stack.
@@ -24,7 +30,8 @@ class Stack<Element> {
     /// - note:     `nil` if the stack is empty.
     ///
     var peek: Element? {
-        return self.representation.last
+        guard !self.isEmpty else { return nil }
+        return self.representation[self.endIndex - 1]
     }
     
     /// Designated initializer.
@@ -32,8 +39,9 @@ class Stack<Element> {
     /// - parameters:
     ///   - array:  An `Array<Element>` to copy.
     ///
-    init(from array: [Element] = []) {
-        self.representation = array
+    init(from array: Array<Element> = []) {
+        self.representation = UnsafeArray(array)
+        self.count = self.representation.count
     }
     
     /// Initializer required by `ExpressibleByArrayLiteral`.
@@ -48,7 +56,8 @@ class Stack<Element> {
     ///   - element:    The element to push onto stack.
     ///
     func push(_ element: Element) {
-        self.representation.append(element)
+        defer { self.count += 1 }
+        self.representation.insert(element, at: self.endIndex)
     }
     
     /// Pops the top element off the stack.
@@ -58,13 +67,15 @@ class Stack<Element> {
     ///
     @discardableResult
     func pop() -> Element? {
-        return self.representation.popLast()
+        guard !self.isEmpty else { return nil }
+        self.count -= 1
+        return self.representation[self.endIndex]
     }
     
     /// Resets the stack into an empty state.
     ///
     func clear() {
-        self.representation.removeAll()
+        self.count = 0
     }
 }
 
@@ -75,15 +86,15 @@ extension Stack: Collection {
     typealias Index = Array<Element>.Index
     
     var startIndex: Index {
-        return self.representation.startIndex
+        return 0
     }
     
     var endIndex: Index {
-        return self.representation.endIndex
+        return self.count
     }
     
     func index(after i: Index) -> Index {
-        return self.representation.index(after: i)
+        return i + 1
     }
     
     subscript (position: Index) -> Element {
@@ -124,4 +135,16 @@ extension Stack: Sequence {
 
 extension Stack: ExpressibleByArrayLiteral {
     typealias ArrayLiteralElement = Element
+}
+
+
+
+extension Stack: CustomStringConvertible {
+
+    var description: String {
+        let inner = self.representation
+            .map{ String(describing: $0) }
+            .joined(separator: ", ")
+        return "[\(inner)]"
+    }
 }

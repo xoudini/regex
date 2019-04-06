@@ -23,6 +23,23 @@ class UnsafeArray<Element> {
     /// The currently reserved capacity for the array.
     private(set) var capacity: Int
     
+    /// A boolean value indicating whether the array is empty.
+    var isEmpty: Bool {
+        return self.count == 0
+    }
+    
+    /// The first element of the array.
+    var first: Element? {
+        guard self.isEmpty else { return nil }
+        return self[self.startIndex]
+    }
+    
+    /// The last element of the array.
+    var last: Element? {
+        guard self.isEmpty else { return nil }
+        return self[self.endIndex - 1]
+    }
+    
     /// Designated initializer.
     ///
     /// - parameters:
@@ -32,9 +49,33 @@ class UnsafeArray<Element> {
     ///                 consider using a power of 2.
     ///
     init(with capacity: Int = 8) {
-        self.pointer = UnsafeMutablePointer<Element>.allocate(capacity: capacity)
+        self.capacity = Swift.max(1, capacity)
         self.count = 0
-        self.capacity = capacity
+        self.pointer = UnsafeMutablePointer<Element>.allocate(capacity: self.capacity)
+    }
+    
+    /// Copy initializer.
+    ///
+    init(copying other: UnsafeArray<Element>) {
+        self.pointer = UnsafeMutablePointer<Element>.allocate(capacity: other.capacity)
+        self.pointer.initialize(from: other.pointer, count: other.count)
+        self.count = other.count
+        self.capacity = other.capacity
+    }
+    
+    /// Convenience initializer copying elements from a Foundation `Array`.
+    ///
+    convenience init(_ array: Array<Element>) {
+        self.init()
+        for element in array {
+            self.append(element)
+        }
+    }
+    
+    /// Initializer required by `ExpressibleByArrayLiteral`.
+    ///
+    required convenience init(arrayLiteral elements: ArrayLiteralElement...) {
+        self.init(elements)
     }
     
     /// Inserts an element at the given index.
@@ -68,7 +109,53 @@ class UnsafeArray<Element> {
         self.insert(element, at: self.endIndex)
     }
     
-    /// Prevents memory leaks by deallocating the pointer prior ARC cleaning up this instance.
+    /// Realigns the element at `startIndex` to the pointer at the base address, and
+    /// aligns the remaining elements up to `endIndex` linearly.
+    ///
+    /// - parameters:
+    ///   - startIndex: The index to align with the internal starting index.
+    ///   - endIndex:   The index after the last element to include in the operation.
+    ///
+    /// - warning:      Both indices must be initialized for the instance, and
+    ///                 `endIndex` must be greater than `startIndex`.
+    ///
+    func align(startIndex: Index, endIndex: Index) {
+        var index = self.startIndex
+        let count = endIndex - startIndex
+        while index < count {
+            self.pointer.advanced(by: index).assign(self[startIndex + index])
+            index += 1
+        }
+        self.pointer.advanced(by: count).deinitialize(count: self.endIndex - count)
+        self.count = count
+    }
+    
+    /// Creates an identical copy of the instance.
+    ///
+    /// - returns:      A copy of the instance.
+    ///
+    func copy() -> UnsafeArray<Element> {
+        return UnsafeArray(copying: self)
+    }
+    
+    /// Creates a copy of a slice of the instance between the given indices.
+    ///
+    /// - parameters:
+    ///   - startIndex: The index to start the copy from.
+    ///   - endIndex:   The index after the last element to include in the copy.
+    ///
+    /// - returns:      A partial copy of the instance.
+    /// - warning:      Both indices must be initialized for the instance, and
+    ///                 `endIndex` must be greater than `startIndex`.
+    ///
+    func copy(from startIndex: Index, to endIndex: Index) -> UnsafeArray<Element> {
+        let capacity = Swift.max(8, endIndex - startIndex)
+        return (startIndex..<endIndex).reduce(into: UnsafeArray<Element>(with: capacity)) { (array, index) in
+            array.append(self[index])
+        }
+    }
+    
+    /// Prevents memory leaks by deallocating the pointer prior to ARC releasing this instance.
     ///
     deinit {
         self.pointer.deallocate()
@@ -99,4 +186,11 @@ extension UnsafeArray: RandomAccessCollection {
             return self.pointer.advanced(by: position).pointee
         }
     }
+}
+
+
+// MARK: - ExpressibleByArrayLiteral
+
+extension UnsafeArray: ExpressibleByArrayLiteral {
+    typealias ArrayLiteralElement = Element
 }
