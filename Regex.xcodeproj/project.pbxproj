@@ -121,8 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				377C917A2243E6EF005F4888 /* RegexTests.swift */,
-				377C91892243FEA1005F4888 /* StackTests.swift */,
-				37D73DAE2257D2A100BD94F0 /* QueueTests.swift */,
+				37D73DB42258ABB800BD94F0 /* Collections */,
 				377C919422455C5F005F4888 /* ParserTests.swift */,
 				37D73D80224E38ED00BD94F0 /* NFATests.swift */,
 				377C917C2243E6EF005F4888 /* Info.plist */,
@@ -180,11 +179,11 @@
 			isa = PBXGroup;
 			children = (
 				37AB2C64223CF636004171E8 /* main.swift */,
+				377C91862243EE59005F4888 /* Collections */,
 				377C919B22457FA9005F4888 /* Errors */,
 				37D73D89224E99D400BD94F0 /* Expression */,
 				377C919622457EB2005F4888 /* Parsing */,
 				37D73D84224E988300BD94F0 /* NFA */,
-				377C91862243EE59005F4888 /* Collections */,
 				37D73DB22257EA6600BD94F0 /* Extensions */,
 			);
 			path = Source;
@@ -222,6 +221,15 @@
 				37D73DB02257EA5F00BD94F0 /* UnsafeMutablePointer.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		37D73DB42258ABB800BD94F0 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				377C91892243FEA1005F4888 /* StackTests.swift */,
+				37D73DAE2257D2A100BD94F0 /* QueueTests.swift */,
+			);
+			path = Collections;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
