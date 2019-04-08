@@ -9,14 +9,15 @@ import Foundation
 /// - note:     Represented by the `(...)` expression.
 ///
 struct ConcatenatedExpression: Expression {
-    var children: [Expression]
+//    var children: UnsafeArray<Expression>
+    let children: [Expression]
     
-    init(with children: [Expression]) {
-        self.children = children
+    init(with children: UnsafeArray<Expression>) {
+        self.children = children.map{ $0 }
     }
     
     init(_ children: Expression...) {
-        self.init(with: children)
+        self.init(with: UnsafeArray(children))
     }
 }
 

@@ -6,7 +6,7 @@ import Foundation
 
 /// The main parser class.
 ///
-class Parser {
+public class Parser {
     /// The regular expression given to the initializer.
     let regex: String
     
@@ -27,7 +27,7 @@ class Parser {
     /// - parameters:
     ///   - regex:  The regular expression to parse.
     ///
-    init(with regex: String) {
+    public init(with regex: String) {
         self.regex = regex
         self.context = ParserContext()
     }
@@ -37,7 +37,7 @@ class Parser {
     /// - throws:   A `ParsingError` in case something goes wrong.
     /// - returns:  The root of the resulting parse tree.
     ///
-    func parse() throws -> Expression {
+    public func parse() throws -> Expression {
         let provider = Provider(self.regex)
         let expression = try self.consume(provider)
         guard case .none = self.context.state else { throw ParsingError.invalidEndState }
@@ -118,7 +118,7 @@ extension Parser {
                         return UnionExpression(previous, expression)
                     }
                     defer { stack.clear() }
-                    return UnionExpression(ConcatenatedExpression(with: stack.representation), expression)
+                    return UnionExpression(ConcatenatedExpression(with: stack.elements), expression)
                 }()
                 
                 stack.push(union)
@@ -134,7 +134,7 @@ extension Parser {
         case 1:
             return stack.first!
         default:
-            return ConcatenatedExpression(with: stack.representation)
+            return ConcatenatedExpression(with: stack.elements)
         }
     }
 }

@@ -7,12 +7,12 @@ import Foundation
 
 /// Protocol for expression type conformance.
 ///
-protocol Expression: NFAConvertible, CustomStringConvertible { }
+public protocol Expression: NFAConvertible, CustomStringConvertible { }
 
 
 /// Protocol for expression types containing convertible expressions.
 ///
-protocol NFAConvertible {
+public protocol NFAConvertible {
     
     /// Method for inserting an `NFA` between two states.
     ///

@@ -6,7 +6,7 @@ import Foundation
 
 /// A state type used in finite automata.
 ///
-class State {
+public class State {
     
     /// An enumerator describing the type of a state.
     ///

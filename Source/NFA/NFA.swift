@@ -6,7 +6,7 @@ import Foundation
 
 /// Non-deterministic finite automaton implementation.
 ///
-class NFA {
+public class NFA {
     /// A tuple holding the initial and terminal states.
     var states: (initial: State, terminal: State)
     
@@ -42,7 +42,7 @@ class NFA {
     /// - parameters:
     ///   - expression: An expression, which may be a wrapper for another expression.
     ///
-    init(from expression: Expression) {
+    public init(from expression: Expression) {
         let states = (State(category: .initial), State(category: .terminal))
         expression.insert(between: states)
         self.states = states
@@ -79,7 +79,7 @@ class NFA {
     ///
     /// - returns:      A boolean value, depending on whether the input was matched.
     ///
-    func matches(_ input: String) -> Bool {
+    public func matches(_ input: String) -> Bool {
         let queue: Queue<State> = [self.states.initial]
         
         for character in input {
