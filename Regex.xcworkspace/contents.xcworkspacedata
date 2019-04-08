@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Rift.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "container:Regex.xcodeproj">
    </FileRef>
 </Workspace>
