@@ -1,0 +1,10 @@
+.build/
+.git/
+Docs/
+*.xcodeproj/
+*.xcworkspace/
+
+.DS_Store
+.gitignore
+*.md
+Dockerfile
