@@ -62,10 +62,17 @@ extension Parser {
         loop: while let character = provider.next() {
             
             switch (context.state, character) {
+            
             // TODO: Decide on specific escape characters to handle.
             case (.escaped, _):
-                stack.push(CharacterExpression(character))
                 self.context.exit()
+                if case .choice = self.context.state {
+                    var expression = stack.pop() as! ChoiceExpression
+                    expression.characterSet.insert(character)
+                    stack.push(expression)
+                } else {
+                    stack.push(CharacterExpression(character))
+                }
                 
             case (_, "\\"):
                 self.context.enter(state: .escaped)
