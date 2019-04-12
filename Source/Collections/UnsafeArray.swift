@@ -30,13 +30,13 @@ class UnsafeArray<Element> {
     
     /// The first element of the array.
     var first: Element? {
-        guard self.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         return self[self.startIndex]
     }
     
     /// The last element of the array.
     var last: Element? {
-        guard self.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         return self[self.endIndex - 1]
     }
     
@@ -126,7 +126,11 @@ class UnsafeArray<Element> {
             self.pointer.advanced(by: index).assign(self[startIndex + index])
             index += 1
         }
+        
+        // Release references to prevent memory leaks.
         self.pointer.advanced(by: count).deinitialize(count: self.endIndex - count)
+        
+        // Set count to amount of initialized instances.
         self.count = count
     }
     
@@ -155,9 +159,14 @@ class UnsafeArray<Element> {
         }
     }
     
-    /// Prevents memory leaks by deallocating the pointer prior to ARC releasing this instance.
+    /// Prevents memory leaks by releasing strong references in the buffer, and
+    /// deallocating the pointer, prior to ARC releasing this instance.
     ///
     deinit {
+        // Release references.
+        self.pointer.deinitialize(count: self.count)
+        
+        // Release memory.
         self.pointer.deallocate()
     }
 }
