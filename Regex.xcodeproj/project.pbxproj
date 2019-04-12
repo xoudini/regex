@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37157E4922611E890024BBFB /* UnsafeArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37157E4822611E890024BBFB /* UnsafeArrayTests.swift */; };
 		37D73E17225BDDE300BD94F0 /* Regex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D73E0D225BDDE300BD94F0 /* Regex.framework */; };
 		37D73E1C225BDDE300BD94F0 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73E1B225BDDE300BD94F0 /* RegexTests.swift */; };
 		37D73E1E225BDDE300BD94F0 /* Regex.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D73E10225BDDE300BD94F0 /* Regex.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37157E4822611E890024BBFB /* UnsafeArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeArrayTests.swift; sourceTree = "<group>"; };
 		37D73E0D225BDDE300BD94F0 /* Regex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Regex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D73E10225BDDE300BD94F0 /* Regex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Regex.h; sourceTree = "<group>"; };
 		37D73E11225BDDE300BD94F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				37D73E85225BE14700BD94F0 /* StackTests.swift */,
 				37D73E86225BE14700BD94F0 /* QueueTests.swift */,
+				37157E4822611E890024BBFB /* UnsafeArrayTests.swift */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				37D73E88225BE14700BD94F0 /* ParserTests.swift in Sources */,
 				37D73E8B225BE14700BD94F0 /* NFATests.swift in Sources */,
 				37D73E1C225BDDE300BD94F0 /* RegexTests.swift in Sources */,
+				37157E4922611E890024BBFB /* UnsafeArrayTests.swift in Sources */,
 				37D73E89225BE14700BD94F0 /* StackTests.swift in Sources */,
 				37D73E8A225BE14700BD94F0 /* QueueTests.swift in Sources */,
 			);
