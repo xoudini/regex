@@ -7,7 +7,7 @@ A regular expression matcher built using Swift.
 
 - [x] [Project specification](Docs/SPECIFICATION.md)
 - [x] [Implementation document](Docs/IMPLEMENTATION.md) (WIP)
-- [x] [Testing document](Docs/TESTING.md) (WIP)
+- [x] [Testing document](Docs/TESTING.md) (WIP) (and [test coverage](Docs/coverage.txt))
 - [ ] User guide
 
 
