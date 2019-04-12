@@ -117,4 +117,33 @@ class ParserTests: XCTestCase {
         XCTAssertEqual(children[0], "a")
         XCTAssertEqual(children[1], "b")
     }
+    
+    func testEscapedCharacter() {
+        let parser = Parser(with: "ab\\?")
+        
+        XCTAssertNotNil(parser.result)
+        
+        let group = parser.result as! ConcatenatedExpression
+        XCTAssertEqual(group.children.count, 3)
+        
+        let children = group.children.compactMap { ($0 as? CharacterExpression)?.character }
+        XCTAssertEqual(children.count, 3)
+        XCTAssertEqual(children[0], "a")
+        XCTAssertEqual(children[1], "b")
+        XCTAssertEqual(children[2], "?")
+    }
+    
+    func testEscapedCharacterInChoiceContext() {
+        let parser = Parser(with: "a[\\[\\]]")
+        
+        XCTAssertNotNil(parser.result)
+        
+        let group = parser.result as! ConcatenatedExpression
+        XCTAssertEqual(group.children.count, 2)
+        
+        let choice = group.children.last as! ChoiceExpression
+        XCTAssertTrue(choice.characterSet.contains("["))
+        XCTAssertTrue(choice.characterSet.contains("]"))
+        XCTAssertEqual(choice.characterSet.count, 2)
+    }
 }
