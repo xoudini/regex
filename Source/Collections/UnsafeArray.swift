@@ -160,7 +160,7 @@ class UnsafeArray<Element> {
     ///
     func copy(from startIndex: Index, to endIndex: Index) -> UnsafeArray<Element> {
         let capacity = Swift.max(8, endIndex - startIndex)
-        return (startIndex..<endIndex).reduce(into: UnsafeArray<Element>(with: capacity)) { (array, index) in
+        return (startIndex..<endIndex).reduce(into: UnsafeArray(with: capacity)) { (array, index) in
             array.append(self[index])
         }
     }
@@ -200,6 +200,158 @@ extension UnsafeArray: RandomAccessCollection {
         get {
             return self.pointer.advanced(by: position).pointee
         }
+    }
+}
+
+
+// MARK: - Convenience functions
+
+extension UnsafeArray {
+    
+    /// Unpacks the array into a tuple containing the head and tail
+    /// of the array, where the head refers to the first element and
+    /// the tail to all remaining elements of the array.
+    ///
+    /// - returns:      An optional tuple containing the head
+    ///                 and tail of the array.
+    ///
+    func unpack() -> (Element, UnsafeArray<Element>)? {
+        guard let first = self.first else { return nil }
+        return (first, self.copy(from: self.startIndex + 1, to: self.endIndex))
+    }
+    
+    /// Returns a copy of this array, mapping each element by calling the given
+    /// transform in the process.
+    ///
+    /// - parameters:
+    ///   - transform:  A closure transforming an `Element` into type `T`.
+    ///
+    /// - returns:      The mapped array.
+    ///
+    func map<T>(_ transform: (Element) throws -> T) rethrows -> UnsafeArray<T> {
+        return try self.reduce(into: UnsafeArray<T>(with: self.capacity)) { (array, element) in
+            array.append(try transform(element))
+        }
+    }
+    
+    /// Returns a copy of this array, mapping each element by calling the given
+    /// transform in the process, and excluding `nil` results.
+    ///
+    /// - parameters:
+    ///   - transform:  A closure transforming an `Element` into type `T?`.
+    ///
+    /// - returns:      The mapped array excluding `nil` post-transform results.
+    ///
+    func compactMap<T>(_ transform: (Element) throws -> T?) rethrows -> UnsafeArray<T> {
+        return try self.reduce(into: UnsafeArray<T>(with: self.capacity)) { (array, element) in
+            guard let result = try transform(element) else { return }
+            array.append(result)
+        }
+    }
+    
+    /// Flattens the sequences resulting from calling the given transform
+    /// for each element of this array into a contiguous array.
+    ///
+    /// - parameters:
+    ///   - transform:  A closure transforming an `Element` into a
+    ///                 sequence containing elements of generic type.
+    ///
+    /// - returns:      The flattened array.
+    ///
+    func flatMap<S>(_ transform: (Element) throws -> S) rethrows -> UnsafeArray<S.Element> where S : Sequence {
+        return try self.reduce(into: UnsafeArray<S.Element>()) { (array, element) in
+            for element in try transform(element) {
+                array.append(element)
+            }
+        }
+    }
+    
+    /// Filters the elements of this array using the given predicate.
+    ///
+    /// - parameters:
+    ///   - isIncluded: A predicate closure for `Element` instances.
+    ///
+    /// - returns:      The filtered array.
+    ///
+    func filter(_ isIncluded: (Element) throws -> Bool) rethrows -> UnsafeArray<Element> {
+        return try self.reduce(into: UnsafeArray()) { (array, element) in
+            guard try isIncluded(element) else { return }
+            array.append(element)
+        }
+    }
+    
+    /// Returns the first element matching the given predicate.
+    ///
+    /// - parameters:
+    ///   - predicate:  A predicate closure for `Element` instances.
+    ///
+    /// - returns:      The first element matching the predicate, or `nil`
+    ///                 if no match was found.
+    ///
+    /// - note:         This is a short-circuiting operation.
+    ///
+    func first(where predicate: (Element) throws -> Bool) rethrows -> Element? {
+        var iterator = self.makeIterator()
+        while let next = iterator.next() {
+            guard try !predicate(next) else { return next }
+        }
+        return nil
+    }
+    
+    /// A boolean check for whether an element matching the given predicate
+    /// exists in the array.
+    ///
+    /// - parameters:
+    ///   - predicate:  A predicate closure for `Element` instances.
+    ///
+    /// - returns:      `true` if a match was found, `false` otherwise.
+    ///
+    /// - note:         This is a short-circuiting operation.
+    ///
+    func contains(where predicate: (Element) throws -> Bool) rethrows -> Bool {
+        return try self.first(where: predicate) != nil
+    }
+    
+    /// Reduces the elements of this array into the given initial result, by
+    /// using the given reducer closure.
+    ///
+    /// - parameters:
+    ///   - initialResult:      The initial result to reduce into.
+    ///   - nextPartialResult:  The reducer closure.
+    ///
+    /// - returns:              The result after the reducer has been
+    ///                         applied to each element of this array.
+    ///
+    func reduce<Result>(
+        _ initialResult: Result,
+        _ nextPartialResult: (Result, Element) throws -> Result
+    ) rethrows -> Result {
+        var result = initialResult, iterator = self.makeIterator()
+        while let next = iterator.next() {
+            result = try nextPartialResult(result, next)
+        }
+        return result
+    }
+    
+    /// Reduces the elements of this array into the given initial result, by
+    /// using the given reducer closure.
+    ///
+    /// - parameters:
+    ///   - initialResult:              The initial result to reduce into.
+    ///   - updateAccumulatingResult:   The reducer closure.
+    ///
+    /// - returns:                      The result after the reducer has been
+    ///                                 applied to each element of this array.
+    ///
+    func reduce<Result>(
+        into initialResult: Result,
+        _ updateAccumulatingResult: (inout Result, Element) throws -> ()
+    ) rethrows -> Result {
+        var accumulator = initialResult, iterator = self.makeIterator()
+        while let next = iterator.next() {
+            try updateAccumulatingResult(&accumulator, next)
+        }
+        return accumulator
     }
 }
 
