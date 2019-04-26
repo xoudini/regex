@@ -18,7 +18,7 @@ A regular expression matcher built using Swift.
 - [x] [Week 3](Docs/Reports/3.md)
 - [x] [Week 4](Docs/Reports/4.md)
 - [x] [Week 5](Docs/Reports/5.md)
-- [ ] Week 6
+- [x] [Week 6](Docs/Reports/6.md)
 
 
 ## Running the project
