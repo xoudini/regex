@@ -9,7 +9,7 @@ Some cases have been tested for performance using `measure`-blocks. The purpose 
 
 ## Inputs
 
-> TODO
+The inputs have mainly been benign expressions, and – as mentioned – malicious expressions have been tested for performance tests. The length of the tested input strings have been relatively short, but the intention is to test against longer strings using the compiled binary.
 
 
 ## Running the tests
@@ -35,7 +35,11 @@ Start the container using the command `make container` in the directory containi
 
 ## Test results
 
-> TODO
+All tests are passing and [coverage](coverage.txt) is above 90%, although there probably are several limits untested. Thus far, all regular expressions have been evaluated correctly – valid inputs have been matched, and invalid inputs rejected.
+
+As expected, some pathological cases cause problems for matching efficiency. Regular expressions such as `(a+)+` suffer from exponential growth for each additional matching input character. E.g. the input string `aaaaaaaaaaaaaaa` already requires 0.4 seconds (unoptimized, with debug flags) to be matched. This issue will be remedied, if this won't require too extensive rewrites, and time permits.
+
+As far as I've tested, average cases perform quite well. After compilation using standard optimizations, the efficiency of the program is within the same order of magnitude as `grep`.
 
 
 [xctest]: https://github.com/apple/swift-corelibs-xctest
