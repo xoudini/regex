@@ -91,6 +91,8 @@ public class NFA {
             }
         }
         
-        return queue.flatMap{ $0.closure }.contains{ state in state === self.states.terminal }
+        return queue
+            .flatMap { $0.closure }
+            .contains { state in state === self.states.terminal }
     }
 }

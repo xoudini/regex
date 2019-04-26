@@ -9,10 +9,10 @@ import Foundation
 /// - note:     Represented by the `...|...` expression.
 ///
 struct UnionExpression: Expression {
-    var alternatives: [Expression]
+    var alternatives: UnsafeArray<Expression>
     
     init(_ alternatives: Expression...) {
-        self.alternatives = alternatives.reduce(into: []) { (accumulator, next) in
+        self.alternatives = alternatives.reduce(into: UnsafeArray()) { (accumulator, next) in
             if let expression = next as? UnionExpression {
                 accumulator.append(contentsOf: expression.alternatives)
             } else {
@@ -30,8 +30,10 @@ extension UnionExpression: NFAConvertible {
     
     func insert(between states: (State, State)) {
         let (initial, terminal) = states
-        guard let first = self.alternatives.first else { fatalError() }
-        let nfa = self.alternatives.dropFirst().reduce(into: NFA(from: first)) { (nfa, expression) in
+
+        guard let (head, tail) = self.alternatives.unpack() else { fatalError() }
+
+        let nfa = tail.reduce(into: NFA(from: head)) { (nfa, expression) in
             nfa.union(with: NFA(from: expression))
         }
         

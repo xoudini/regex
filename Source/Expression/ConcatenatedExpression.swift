@@ -9,11 +9,10 @@ import Foundation
 /// - note:     Represented by the `(...)` expression.
 ///
 struct ConcatenatedExpression: Expression {
-//    var children: UnsafeArray<Expression>
-    let children: [Expression]
+    var children: UnsafeArray<Expression>
     
     init(with children: UnsafeArray<Expression>) {
-        self.children = children.map{ $0 }
+        self.children = children
     }
     
     init(_ children: Expression...) {
@@ -25,8 +24,10 @@ extension ConcatenatedExpression: NFAConvertible {
     
     func insert(between states: (State, State)) {
         let (initial, terminal) = states
-        guard let first = self.children.first else { fatalError() }
-        let nfa = self.children.dropFirst().reduce(into: NFA(from: first)) { (nfa, expression) in
+        
+        guard let (head, tail) = self.children.unpack() else { fatalError() }
+        
+        let nfa = tail.reduce(into: NFA(from: head)) { (nfa, expression) in
             nfa.concatenate(with: NFA(from: expression))
         }
         
