@@ -118,7 +118,13 @@ extension UnsafeArrayTests {
         ("testPerformanceWithCustomClass", testPerformanceWithCustomClass),
         ("testPerformanceWithCustomStruct", testPerformanceWithCustomStruct),
         ("testReallocatingInsert", testReallocatingInsert),
+        ("testReduceWithAccumulatingResult", testReduceWithAccumulatingResult),
+        ("testReduceWithInitialResult", testReduceWithInitialResult),
         ("testSliceCopying", testSliceCopying),
+        ("testUnpackingWithEmptyArray", testUnpackingWithEmptyArray),
+        ("testUnpackingWithMultipleElements", testUnpackingWithMultipleElements),
+        ("testUnpackingWithOneElement", testUnpackingWithOneElement),
+        ("testUnpackingWithReferenceTypes", testUnpackingWithReferenceTypes),
     ]
 }
 
