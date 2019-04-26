@@ -6,6 +6,12 @@ import XCTest
 
 @testable import Regex
 
+#if os(OSX)
+let rand = arc4random
+#elseif os(Linux)
+let rand = random
+#endif
+
 class UnsafeArrayTests: XCTestCase {
 
     var array: UnsafeArray<Int>!
@@ -168,7 +174,7 @@ class UnsafeArrayTests: XCTestCase {
     
     func testUnpackingWithReferenceTypes() {
         var array: UnsafeArray<SampleClass>! = (0..<30).reduce(into: UnsafeArray()) { (result, _) in
-            let value = Int(arc4random())
+            let value = Int(rand())
             result.append(SampleClass(value: value))
         }
         
@@ -257,7 +263,7 @@ class UnsafeArrayTests: XCTestCase {
     
     func testPerformanceWithCustomStruct() {
         let ts = (0..<500000).reduce(into: [(x: Int, y: Int)]()) { (result, _) in
-            let tuple = (Int(arc4random()), Int(arc4random()))
+            let tuple = (Int(rand()), Int(rand()))
             result.append(tuple)
         }
         var array: UnsafeArray<SampleStruct>!
@@ -278,7 +284,7 @@ class UnsafeArrayTests: XCTestCase {
     
     func testPerformanceOfArrayWithCustomStruct() {
         let ts = (0..<500000).reduce(into: [(x: Int, y: Int)]()) { (result, _) in
-            let tuple = (Int(arc4random()), Int(arc4random()))
+            let tuple = (Int(rand()), Int(rand()))
             result.append(tuple)
         }
         var array: Array<SampleStruct>!
@@ -310,7 +316,7 @@ class UnsafeArrayTests: XCTestCase {
     
     func testPerformanceWithCustomClass() {
         let xs = (0..<500000).reduce(into: [Int]()) { (result, _) in
-            result.append(Int(arc4random()))
+            result.append(Int(rand()))
         }
         var array: UnsafeArray<SampleClass>!
         
@@ -330,7 +336,7 @@ class UnsafeArrayTests: XCTestCase {
     
     func testPerformanceOfArrayWithCustomClass() {
         let xs = (0..<500000).reduce(into: [Int]()) { (result, _) in
-            result.append(Int(arc4random()))
+            result.append(Int(rand()))
         }
         var array: Array<SampleClass>!
         
