@@ -9,13 +9,15 @@ import Foundation
 class Queue<Element> {
     
     /// The internal representation of the queue.
-    ///
-    /// - todo:     Replace with custom array type.
-    ///
-    private(set) var representation: UnsafeArray<Element>
+    private var representation: UnsafeArray<Element>
+    
+    /// The bounded representation of the queue.
+    private var boundedRepresentation: UnsafeArray<Element> {
+        return self.representation.copy(from: self.head, to: self.tail)
+    }
     
     /// A bounding index for the queue.
-    private var head: Index, tail: Index
+    private(set) var head: Index, tail: Index
     
     /// The current count of elements in the queue.
     var count: Int {
@@ -124,6 +126,27 @@ extension Queue: Sequence {
     
     func makeIterator() -> Queue<Element>.Iterator {
         return Iterator(self)
+    }
+}
+
+
+// MARK: - Convenience
+
+extension Queue {
+    
+    /// Flattens the sequences resulting from calling the given transform
+    /// for each element of this queue into a contiguous array.
+    ///
+    /// - parameters:
+    ///   - transform:  A closure transforming an `Element` into a
+    ///                 sequence containing elements of generic type.
+    ///
+    /// - returns:      The flattened array.
+    ///
+    func flatMap<S>(
+        _ transform: (Element) throws -> S
+    ) rethrows -> UnsafeArray<S.Element> where S : Sequence {
+        return try self.boundedRepresentation.flatMap(transform)
     }
 }
 

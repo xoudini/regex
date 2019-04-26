@@ -25,6 +25,18 @@ class Stack<Element> {
         return self.count == 0
     }
     
+    /// The bottom element of the stack.
+    var first: Element? {
+        guard !self.isEmpty else { return nil }
+        return self[self.startIndex]
+    }
+    
+    /// The top element of the stack.
+    var last: Element? {
+        guard !self.isEmpty else { return nil }
+        return self[self.endIndex - 1]
+    }
+    
     /// The current top element in the stack.
     ///
     /// - note:     `nil` if the stack is empty.
