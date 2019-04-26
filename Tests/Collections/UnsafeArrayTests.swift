@@ -137,8 +137,81 @@ class UnsafeArrayTests: XCTestCase {
         array = nil
         XCTAssertNil(self.dummy)
     }
+    
+    
+    // MARK: - Custom convenience functions
+    
+    func testUnpackingWithEmptyArray() {
+        XCTAssertNil(self.array.unpack())
+    }
+    
+    func testUnpackingWithOneElement() {
+        self.array.append(15)
+        
+        guard let (head, tail) = self.array.unpack() else { return XCTFail() }
+        
+        XCTAssertEqual(head, 15)
+        XCTAssertTrue(tail.isEmpty)
+    }
+    
+    func testUnpackingWithMultipleElements() {
+        let xs = (0...30).shuffled()
+        self.array = UnsafeArray(xs)
+        
+        guard let (head, tail) = self.array.unpack() else { return XCTFail() }
+        
+        XCTAssertEqual(head, xs.first)
+        XCTAssertEqual(tail.count, xs.count - 1)
+        XCTAssertEqual(tail[10], xs[11])
+        XCTAssertEqual(tail[20], xs[21])
+    }
+    
+    func testUnpackingWithReferenceTypes() {
+        var array: UnsafeArray<SampleClass>! = (0..<30).reduce(into: UnsafeArray()) { (result, _) in
+            let value = Int(arc4random())
+            result.append(SampleClass(value: value))
+        }
+        
+        guard let (head, tail) = array.unpack() else { return XCTFail() }
+        
+        let value = array.first?.value
+        let count = array.count - 1
+        array = nil
+        
+        XCTAssertEqual(head.value, value)
+        XCTAssertEqual(tail.count, count)
+    }
+    
+    func testReduceWithInitialResult() {
+        let bound = 10
+        let xs = (1...bound).shuffled()
+        self.array = UnsafeArray(xs)
+        
+        let factorial = (1...bound).reduce(1) { $0 * $1 }
+        
+        let result = self.array.reduce(1) { (result, next) in
+            return result * next
+        }
+        
+        XCTAssertEqual(result, factorial)
+    }
+    
+    func testReduceWithAccumulatingResult() {
+        let bound = 10
+        let xs = (1...bound).shuffled()
+        self.array = UnsafeArray(xs)
+        
+        let factorial = (1...bound).reduce(1) { $0 * $1 }
+        
+        let result = self.array.reduce(into: Int(1)) { (result, next) in
+            result *= next
+        }
+        
+        XCTAssertEqual(result, factorial)
+    }
 
-    // MARK: -
+    
+    // MARK: - Performance
     
     func testPerformanceWithBuiltinTypes() {
         let xs = (0..<500000).shuffled()
