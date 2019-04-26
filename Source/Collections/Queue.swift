@@ -12,7 +12,7 @@ class Queue<Element> {
     ///
     /// - todo:     Replace with custom array type.
     ///
-    private(set) var representation: [Element]
+    private(set) var representation: UnsafeArray<Element>
     
     /// A bounding index for the queue.
     private var head: Index, tail: Index
@@ -33,9 +33,9 @@ class Queue<Element> {
     ///   - array:  An `Array<Element>` to copy.
     ///
     init(from array: [Element] = []) {
-        self.representation = array
+        self.representation = UnsafeArray(array)
         self.head = 0
-        self.tail = array.count
+        self.tail = self.representation.count
     }
     
     /// Initializer required by `ExpressibleByArrayLiteral`.
@@ -59,7 +59,7 @@ class Queue<Element> {
     /// - parameters:
     ///   - array:      The elements to enqueue.
     ///
-    func enqueue(contentsOf array: [Element]) {
+    func enqueue(contentsOf array: UnsafeArray<Element>) {
         self.representation.append(contentsOf: array)
         self.tail += array.count
     }
@@ -80,7 +80,7 @@ class Queue<Element> {
 // MARK: - Collection
 
 extension Queue: Collection {
-    typealias Index = Array<Element>.Index
+    typealias Index = UnsafeArray<Element>.Index
     
     var startIndex: Index {
         return 0

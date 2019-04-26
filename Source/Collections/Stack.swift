@@ -83,7 +83,7 @@ class Stack<Element> {
 // MARK: - Collection
 
 extension Stack: Collection {
-    typealias Index = Array<Element>.Index
+    typealias Index = UnsafeArray<Element>.Index
     
     var startIndex: Index {
         return 0
@@ -138,6 +138,7 @@ extension Stack: ExpressibleByArrayLiteral {
 }
 
 
+// MARK: - CustomStringConvertible
 
 extension Stack: CustomStringConvertible {
 

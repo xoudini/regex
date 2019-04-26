@@ -13,7 +13,7 @@ class UnsafeArray<Element> {
     
     /// A pointer to the start of the allocated memory block.
     ///
-    /// - todo:     Consider private-only access -- this shouldn't be modified anyways.
+    /// - todo:     Consider private-only access -- this shouldn't be manipulated anyways.
     ///
     private(set) var pointer: UnsafeMutablePointer<Element>
     
@@ -107,6 +107,12 @@ class UnsafeArray<Element> {
     ///
     func append(_ element: Element) {
         self.insert(element, at: self.endIndex)
+    }
+    
+    func append(contentsOf array: UnsafeArray<Element>) {
+        for element in array {
+            self.append(element)
+        }
     }
     
     /// Realigns the element at `startIndex` to the pointer at the base address, and

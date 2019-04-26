@@ -18,14 +18,14 @@ public class State {
     let category: Category
     
     /// The transitions of this state.
-    var transitions: [Transition]
+    var transitions: UnsafeArray<Transition>
     
     /// The epsilon-closure of the state.
     ///
     /// - warning:  The closure is evaluated lazily, once.
     ///
-    lazy var closure: [State] = {
-        var result: [State] = [self]
+    lazy var closure: UnsafeArray<State> = {
+        var result: UnsafeArray<State> = [self]
         var stack: Stack<State> = [self]
         
         while !stack.isEmpty {
@@ -45,7 +45,7 @@ public class State {
     ///
     init(category: Category = .standard) {
         self.category = category
-        self.transitions = []
+        self.transitions = UnsafeArray()
     }
     
     /// Method for adding transitions.
@@ -67,8 +67,8 @@ public class State {
     /// - note:         May be expensive if `closure` hasn't yet been accessed
     ///                 on this instance.
     ///
-    func destinations(from input: Character) -> [State] {
-        return self.closure.reduce(into: [State]()) { (result, state) in
+    func destinations(from input: Character) -> UnsafeArray<State> {
+        return self.closure.reduce(into: UnsafeArray<State>()) { (result, state) in
             for transition in state.transitions {
                 guard transition.accepts(input) else { continue }
                 result.append(transition.destination)
