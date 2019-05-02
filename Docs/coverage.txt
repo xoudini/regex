@@ -1,8 +1,9 @@
 Filename                                    Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Collections/HashSet.swift                        23                 1    95.65%          11                 0   100.00%          52                 0   100.00%
 Collections/Queue.swift                          20                 1    95.00%          15                 1    93.33%          57                 3    94.74%
 Collections/Stack.swift                          29                 7    75.86%          18                 4    77.78%          69                14    79.71%
-Collections/UnsafeArray.swift                    62                 5    91.94%          28                 2    92.86%         162                10    93.83%
+Collections/UnsafeArray.swift                    63                 5    92.06%          28                 2    92.86%         168                10    94.05%
 Expression/AnyCharacterExpression.swift           2                 0   100.00%           2                 0   100.00%           6                 0   100.00%
 Expression/CharacterExpression.swift              3                 0   100.00%           3                 0   100.00%           9                 0   100.00%
 Expression/ChoiceExpression.swift                 4                 0   100.00%           4                 0   100.00%          11                 0   100.00%
@@ -20,4 +21,4 @@ Parsing/Parser.swift                             43                 5    88.37% 
 Parsing/ParserContext.swift                       5                 0   100.00%           5                 0   100.00%          13                 0   100.00%
 Parsing/Provider.swift                            5                 0   100.00%           3                 0   100.00%          12                 0   100.00%
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                           246                23    90.65%         118                 8    93.22%         680                30    95.59%
+TOTAL                                           270                24    91.11%         129                 8    93.80%         738                30    95.93%

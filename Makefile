@@ -37,6 +37,8 @@ $(_COVERAGE): test
 
 	$(call colorize,2,"Generated coverage at: $(_DOCS_DIR)/$(_COVERAGE)")
 
+	open -a TextEdit $(_DOCS_DIR)/$(_COVERAGE)
+
 coverage: $(_COVERAGE)
 
 
