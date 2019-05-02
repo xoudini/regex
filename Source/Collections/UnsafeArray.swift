@@ -54,6 +54,23 @@ class UnsafeArray<Element> {
         self.pointer = UnsafeMutablePointer<Element>.allocate(capacity: self.capacity)
     }
     
+    /// Allocates a contiguous block of memory of the given capacity and initializes
+    /// each slot with a copy of the given default value.
+    ///
+    /// - parameters:
+    ///   - capacity:   An integer value to use as the capacity for the initial allocation.
+    ///   - value:      The default value to populate the memory region with.
+    ///
+    /// - note:         If not using the default value for the capacity, at least
+    ///                 consider using a power of 2.
+    ///
+    init(with capacity: Int = 8, defaultValue value: Element) {
+        self.capacity = Swift.max(1, capacity)
+        self.count = self.capacity
+        self.pointer = UnsafeMutablePointer<Element>.allocate(capacity: self.capacity)
+        self.pointer.initialize(repeating: value, count: self.count)
+    }
+    
     /// Copy initializer.
     ///
     init(copying other: UnsafeArray<Element>) {
@@ -81,7 +98,7 @@ class UnsafeArray<Element> {
     /// Inserts an element at the given index.
     ///
     /// - parameters:
-    ///   - element:    The elemnt to insert.
+    ///   - element:    The element to insert.
     ///   - index:      The index at which the element should be inserted.
     ///
     /// - warning:      Insertion outside of the bounds invokes undefined behaviour.
@@ -109,6 +126,11 @@ class UnsafeArray<Element> {
         self.insert(element, at: self.endIndex)
     }
     
+    /// Appends the contents of the given array at the end of this array.
+    ///
+    /// - parameters:
+    ///   - array:      The array to append.
+    ///
     func append(contentsOf array: UnsafeArray<Element>) {
         for element in array {
             self.append(element)
