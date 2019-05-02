@@ -119,7 +119,7 @@ class NFATests: XCTestCase {
     
     func testCharacterSetNFA() {
         let state = State(category: .standard)
-        let nfa = NFA(with: state, matching: .set(Set<Character>("abc")))
+        let nfa = NFA(with: state, matching: .set(HashSet<Character>(from: "abc")))
         
         XCTAssertTrue(nfa.matches("a"))
         XCTAssertTrue(nfa.matches("b"))
@@ -131,7 +131,7 @@ class NFATests: XCTestCase {
     func testConcatenatedCharacterSetNFA() {
         let a = State(category: .standard)
         let b = State(category: .standard)
-        let nfa = NFA(with: a, matching: .set(Set<Character>("abc")))
+        let nfa = NFA(with: a, matching: .set(HashSet<Character>(from: "abc")))
         nfa.concatenate(with: NFA(with: b, matching: .single("d")))
         
         XCTAssertTrue(nfa.matches("ad"))
