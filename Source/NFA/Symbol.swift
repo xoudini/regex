@@ -7,7 +7,7 @@ import Foundation
 /// Symbol type describing what input to match.
 ///
 enum Symbol {
-    case any, set(Set<Character>), single(Character)
+    case any, set(HashSet<Character>), single(Character)
 }
 
 extension Symbol {

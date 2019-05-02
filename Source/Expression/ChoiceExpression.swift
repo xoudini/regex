@@ -9,9 +9,9 @@ import Foundation
 /// - note:     Represented by the `[...]` expression.
 ///
 struct ChoiceExpression: Expression {
-    var characterSet: Set<Character>
+    var characterSet: HashSet<Character>
     
-    init(with characterSet: Set<Character> = Set()) {
+    init(with characterSet: HashSet<Character> = HashSet()) {
         self.characterSet = characterSet
     }
 }
