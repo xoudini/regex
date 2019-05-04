@@ -26,7 +26,10 @@ extension ChoiceExpression: SymbolConvertible {
 extension ChoiceExpression: CustomStringConvertible {
     
     var description: String {
-        let characters = self.characterSet.map{ $0.description }.sorted().joined(separator: ", ")
+        let characters = self.characterSet
+            .map{ $0.description }
+            .sorted()
+            .joined(separator: ", ")
         return "Choice(\(characters))"
     }
 }
