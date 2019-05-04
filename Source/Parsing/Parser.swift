@@ -61,11 +61,12 @@ extension Parser {
         
         loop: while let character = provider.next() {
             
-            switch (context.state, character) {
+            switch (self.context.state, character) {
             
             // TODO: Decide on specific escape characters to handle.
             case (.escaped, _):
                 self.context.exit()
+                
                 if case .choice = self.context.state {
                     var expression = stack.pop() as! ChoiceExpression
                     expression.characterSet.insert(character)
@@ -80,10 +81,34 @@ extension Parser {
             case (.choice, "]"):
                 self.context.exit()
                 
+                if case .negation = self.context.state {
+                    self.context.exit()
+                    let expression = stack.pop() as! ChoiceExpression
+                    stack.push(NegatedExpression(expression))
+                }
+            
+            case (.choice, "^"):
+                // Move choice context to top
+                self.context.exit()
+                self.context.enter(state: .negation)
+                self.context.enter(state: .choice)
+                
+                // Make sure this is at the beginning
+                guard
+                    let expression = stack.peek as? ChoiceExpression,
+                    expression.characterSet.isEmpty
+                else {
+                    throw ParsingError.invalidSymbol
+                }
+                
             case (.choice, _):
                 var expression = stack.pop() as! ChoiceExpression
                 expression.characterSet.insert(character)
                 stack.push(expression)
+            
+            case (.negation, _):
+                let expression = CharacterExpression(character)
+                stack.push(NegatedExpression(expression))
                 
             case (.group, ")"):
                 break loop
@@ -137,6 +162,9 @@ extension Parser {
                 }()
                 
                 stack.push(union)
+            
+            case (_, "^"):
+                self.context.enter(state: .negation)
                 
             default:
                 stack.push(CharacterExpression(character))

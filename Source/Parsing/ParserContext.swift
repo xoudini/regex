@@ -16,6 +16,7 @@ class ParserContext {
         case group
         case union
         case choice
+        case negation
     }
     
     /// A stack to keep track of the states during parsing.
