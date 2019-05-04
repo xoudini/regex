@@ -276,6 +276,159 @@ class NFATests: XCTestCase {
         XCTAssertFalse(nfa.matches(""))
     }
     
+    func testNegatedChoiceExpression() {
+        let parser = Parser(with: "a[^123]c")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("abc"))
+        XCTAssertTrue(nfa.matches("axc"))
+        XCTAssertTrue(nfa.matches("aöc"))
+        XCTAssertFalse(nfa.matches("a1c"))
+        XCTAssertFalse(nfa.matches("a2c"))
+        XCTAssertFalse(nfa.matches("a3c"))
+        XCTAssertFalse(nfa.matches("abcd"))
+    }
+    
+    func testWCharacterClassExpression() {
+        let parser = Parser(with: "\\w")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("f"))
+        XCTAssertTrue(nfa.matches("F"))
+        XCTAssertTrue(nfa.matches("_"))
+        XCTAssertTrue(nfa.matches("0"))
+        XCTAssertTrue(nfa.matches("9"))
+        XCTAssertTrue(nfa.matches("a"))
+        XCTAssertTrue(nfa.matches("z"))
+        XCTAssertTrue(nfa.matches("A"))
+        XCTAssertTrue(nfa.matches("Z"))
+        
+        XCTAssertFalse(nfa.matches("ö"))
+        XCTAssertFalse(nfa.matches("-"))
+        
+        XCTAssertFalse(nfa.matches("aa"))
+        XCTAssertFalse(nfa.matches("Test"))
+    }
+    
+    func testNegatedWCharacterClassExpression() {
+        let parser = Parser(with: "\\W")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertFalse(nfa.matches("f"))
+        XCTAssertFalse(nfa.matches("F"))
+        XCTAssertFalse(nfa.matches("_"))
+        XCTAssertFalse(nfa.matches("0"))
+        XCTAssertFalse(nfa.matches("9"))
+        XCTAssertFalse(nfa.matches("a"))
+        XCTAssertFalse(nfa.matches("z"))
+        XCTAssertFalse(nfa.matches("A"))
+        XCTAssertFalse(nfa.matches("Z"))
+        
+        XCTAssertTrue(nfa.matches("ö"))
+        XCTAssertTrue(nfa.matches("-"))
+        
+        XCTAssertFalse(nfa.matches("aa"))
+        XCTAssertFalse(nfa.matches("Test"))
+    }
+    
+    func testDCharacterClassExpression() {
+        let parser = Parser(with: "\\d")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches("0"))
+        XCTAssertTrue(nfa.matches("2"))
+        XCTAssertTrue(nfa.matches("3"))
+        XCTAssertTrue(nfa.matches("6"))
+        XCTAssertTrue(nfa.matches("9"))
+        
+        XCTAssertFalse(nfa.matches("A"))
+        XCTAssertFalse(nfa.matches("z"))
+        XCTAssertFalse(nfa.matches("å"))
+        XCTAssertFalse(nfa.matches("-"))
+        
+        XCTAssertFalse(nfa.matches("00"))
+        XCTAssertFalse(nfa.matches("12345"))
+    }
+    
+    func testNegatedDCharacterClassExpression() {
+        let parser = Parser(with: "\\D")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertFalse(nfa.matches("0"))
+        XCTAssertFalse(nfa.matches("2"))
+        XCTAssertFalse(nfa.matches("3"))
+        XCTAssertFalse(nfa.matches("6"))
+        XCTAssertFalse(nfa.matches("9"))
+        
+        XCTAssertTrue(nfa.matches("A"))
+        XCTAssertTrue(nfa.matches("z"))
+        XCTAssertTrue(nfa.matches("å"))
+        XCTAssertTrue(nfa.matches("-"))
+        
+        XCTAssertFalse(nfa.matches("00"))
+        XCTAssertFalse(nfa.matches("12345"))
+    }
+    
+    func testSCharacterClassExpression() {
+        let parser = Parser(with: "\\s")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertTrue(nfa.matches(" "))
+        XCTAssertTrue(nfa.matches("\t"))
+        XCTAssertTrue(nfa.matches("\n"))
+        XCTAssertTrue(nfa.matches("\r"))
+        XCTAssertTrue(nfa.matches("\u{0b}"))
+        XCTAssertTrue(nfa.matches("\u{0c}"))
+        
+        XCTAssertFalse(nfa.matches("A"))
+        XCTAssertFalse(nfa.matches("z"))
+        XCTAssertFalse(nfa.matches("å"))
+        XCTAssertFalse(nfa.matches("-"))
+        XCTAssertFalse(nfa.matches(":"))
+        XCTAssertFalse(nfa.matches("0"))
+        XCTAssertFalse(nfa.matches("\u{1b}"))
+        
+        XCTAssertFalse(nfa.matches("  "))
+        XCTAssertFalse(nfa.matches(" \n"))
+    }
+    
+    func testNegatedSCharacterClassExpression() {
+        let parser = Parser(with: "\\S")
+        XCTAssertNotNil(parser.result)
+        
+        let nfa = NFA(from: parser.result!)
+        
+        XCTAssertFalse(nfa.matches(" "))
+        XCTAssertFalse(nfa.matches("\t"))
+        XCTAssertFalse(nfa.matches("\n"))
+        XCTAssertFalse(nfa.matches("\r"))
+        XCTAssertFalse(nfa.matches("\u{0b}"))
+        XCTAssertFalse(nfa.matches("\u{0c}"))
+        
+        XCTAssertTrue(nfa.matches("A"))
+        XCTAssertTrue(nfa.matches("z"))
+        XCTAssertTrue(nfa.matches("å"))
+        XCTAssertTrue(nfa.matches("-"))
+        XCTAssertTrue(nfa.matches(":"))
+        XCTAssertTrue(nfa.matches("0"))
+        XCTAssertTrue(nfa.matches("\u{1b}"))
+        
+        XCTAssertFalse(nfa.matches("  "))
+        XCTAssertFalse(nfa.matches(" \n"))
+    }
+    
     func testComplexExpression1() {
         let parser = Parser(with: "(ab)+|[xyz]+")
         XCTAssertNotNil(parser.result)

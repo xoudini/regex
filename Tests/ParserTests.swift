@@ -146,4 +146,15 @@ class ParserTests: XCTestCase {
         XCTAssertTrue(choice.characterSet.contains("]"))
         XCTAssertEqual(choice.characterSet.count, 2)
     }
+    
+    func testNegatedExpressionInChoiceContext() {
+        let parser = Parser(with: "a[^0123456789]c")
+        
+        XCTAssertNotNil(parser.result)
+        
+        let group = parser.result as! ConcatenatedExpression
+        XCTAssertEqual(group.children.count, 3)
+        
+        XCTAssertTrue(group.children[1] is NegatedExpression)
+    }
 }
