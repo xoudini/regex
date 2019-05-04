@@ -31,20 +31,27 @@ extension NFATests {
         ("testConcatenatedCharacterSetNFA", testConcatenatedCharacterSetNFA),
         ("testConcatenatedNFA", testConcatenatedNFA),
         ("testConcatenatedSingleCharacterNFA", testConcatenatedSingleCharacterNFA),
+        ("testDCharacterClassExpression", testDCharacterClassExpression),
         ("testEmptyNFA", testEmptyNFA),
         ("testKleeneStarExpression", testKleeneStarExpression),
         ("testLargeUnionNFA", testLargeUnionNFA),
         ("testLongConcatenatedNFA", testLongConcatenatedNFA),
+        ("testNegatedChoiceExpression", testNegatedChoiceExpression),
+        ("testNegatedDCharacterClassExpression", testNegatedDCharacterClassExpression),
+        ("testNegatedSCharacterClassExpression", testNegatedSCharacterClassExpression),
+        ("testNegatedWCharacterClassExpression", testNegatedWCharacterClassExpression),
         ("testOptionalExpression", testOptionalExpression),
         ("testPlusExpression", testPlusExpression),
         ("testReDoSExpression1", testReDoSExpression1),
         ("testReDoSExpression2", testReDoSExpression2),
         ("testReDoSExpression3", testReDoSExpression3),
+        ("testSCharacterClassExpression", testSCharacterClassExpression),
         ("testSimpleExpression", testSimpleExpression),
         ("testSingleCharacterNFA", testSingleCharacterNFA),
         ("testUnionAndConcatenationCombined", testUnionAndConcatenationCombined),
         ("testUnionExpression", testUnionExpression),
         ("testUnionNFA", testUnionNFA),
+        ("testWCharacterClassExpression", testWCharacterClassExpression),
     ]
 }
 
@@ -60,6 +67,7 @@ extension ParserTests {
         ("testEmptyExpression", testEmptyExpression),
         ("testEscapedCharacter", testEscapedCharacter),
         ("testEscapedCharacterInChoiceContext", testEscapedCharacterInChoiceContext),
+        ("testNegatedExpressionInChoiceContext", testNegatedExpressionInChoiceContext),
         ("testOptionalExpression", testOptionalExpression),
         ("testRepeatedExpression", testRepeatedExpression),
         ("testRepeatedPlusOneExpression", testRepeatedPlusOneExpression),
@@ -89,7 +97,7 @@ extension RegexTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__RegexTests = [
-        ("testExample", testExample),
+        ("testCommonExpression1", testCommonExpression1),
     ]
 }
 
