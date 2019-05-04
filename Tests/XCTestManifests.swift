@@ -8,9 +8,11 @@ extension HashSetTests {
     static let __allTests__HashSetTests = [
         ("testContains", testContains),
         ("testConvenienceInitializer", testConvenienceInitializer),
+        ("testInsertingDuplicates", testInsertingDuplicates),
         ("testInsertWithDefaultBufferSize", testInsertWithDefaultBufferSize),
         ("testInsertWithFewElements", testInsertWithFewElements),
         ("testInsertWithManyElements", testInsertWithManyElements),
+        ("testIteration", testIteration),
     ]
 }
 
@@ -96,6 +98,8 @@ extension StackTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__StackTests = [
+        ("testConvenienceAccessors", testConvenienceAccessors),
+        ("testConvenienceAccessorsWhenEmpty", testConvenienceAccessorsWhenEmpty),
         ("testDesignatedInitializer", testDesignatedInitializer),
         ("testForInIteration", testForInIteration),
         ("testLiteralAssignment", testLiteralAssignment),
@@ -114,16 +118,25 @@ extension UnsafeArrayTests {
     // to regenerate.
     static let __allTests__UnsafeArrayTests = [
         ("testAppend", testAppend),
+        ("testAppendFromArray", testAppendFromArray),
         ("testArrayInitializer", testArrayInitializer),
         ("testAssigningInsert", testAssigningInsert),
         ("testBoundsWithEmptyArray", testBoundsWithEmptyArray),
+        ("testCompactMap", testCompactMap),
+        ("testContains", testContains),
+        ("testCopying", testCopying),
         ("testDeallocation", testDeallocation),
+        ("testFilter", testFilter),
+        ("testFirst", testFirst),
         ("testFirstElement", testFirstElement),
+        ("testFirstForNonexistingElement", testFirstForNonexistingElement),
+        ("testFlatMap", testFlatMap),
         ("testInitializingInsert", testInitializingInsert),
         ("testIsEmpty", testIsEmpty),
         ("testLargeAppend", testLargeAppend),
         ("testLastElement", testLastElement),
         ("testLiteralAssignment", testLiteralAssignment),
+        ("testMap", testMap),
         ("testPerformanceOfArrayWithBuiltinTypes", testPerformanceOfArrayWithBuiltinTypes),
         ("testPerformanceOfArrayWithCustomClass", testPerformanceOfArrayWithCustomClass),
         ("testPerformanceOfArrayWithCustomStruct", testPerformanceOfArrayWithCustomStruct),
