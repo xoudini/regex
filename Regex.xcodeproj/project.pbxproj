@@ -10,6 +10,7 @@
 		37157E4922611E890024BBFB /* UnsafeArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37157E4822611E890024BBFB /* UnsafeArrayTests.swift */; };
 		379BEF89227B8E66008B4546 /* HashSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BEF88227B8E66008B4546 /* HashSetTests.swift */; };
 		379BEF8B227DE7CA008B4546 /* NegatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BEF8A227DE7CA008B4546 /* NegatedExpression.swift */; };
+		379BEF8D227E083A008B4546 /* CharacterClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BEF8C227E083A008B4546 /* CharacterClass.swift */; };
 		379FDBCF227B847E00135EFC /* HashSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FDBCE227B847E00135EFC /* HashSet.swift */; };
 		37D73E17225BDDE300BD94F0 /* Regex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D73E0D225BDDE300BD94F0 /* Regex.framework */; };
 		37D73E1C225BDDE300BD94F0 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73E1B225BDDE300BD94F0 /* RegexTests.swift */; };
@@ -54,6 +55,7 @@
 		37157E4822611E890024BBFB /* UnsafeArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeArrayTests.swift; sourceTree = "<group>"; };
 		379BEF88227B8E66008B4546 /* HashSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSetTests.swift; sourceTree = "<group>"; };
 		379BEF8A227DE7CA008B4546 /* NegatedExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegatedExpression.swift; sourceTree = "<group>"; };
+		379BEF8C227E083A008B4546 /* CharacterClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterClass.swift; sourceTree = "<group>"; };
 		379FDBCE227B847E00135EFC /* HashSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSet.swift; sourceTree = "<group>"; };
 		37D73E0D225BDDE300BD94F0 /* Regex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Regex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D73E10225BDDE300BD94F0 /* Regex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Regex.h; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		37D73E6B225BE05000BD94F0 /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
+				379BEF8C227E083A008B4546 /* CharacterClass.swift */,
 				37D73E6C225BE05000BD94F0 /* Provider.swift */,
 				37D73E6D225BE05000BD94F0 /* ParserContext.swift */,
 				37D73E6E225BE05000BD94F0 /* Parser.swift */,
@@ -347,6 +350,7 @@
 				37D73E7B225BE05000BD94F0 /* Transition.swift in Sources */,
 				37D73E75225BE05000BD94F0 /* ConcatenatedExpression.swift in Sources */,
 				37D73E76225BE05000BD94F0 /* ChoiceExpression.swift in Sources */,
+				379BEF8D227E083A008B4546 /* CharacterClass.swift in Sources */,
 				37D73E82225BE05000BD94F0 /* Parser.swift in Sources */,
 				37D73E73225BE05000BD94F0 /* UnionExpression.swift in Sources */,
 				37D73E7E225BE05000BD94F0 /* Queue.swift in Sources */,
