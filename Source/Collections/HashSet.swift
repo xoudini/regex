@@ -38,6 +38,11 @@ public class HashSet<Element: Hashable & Comparable> {
     /// The current count of elements in the set.
     public private(set) var count: Int
     
+    /// A boolean value indicating whether the set is empty.
+    public var isEmpty: Bool {
+        return self.count == 0
+    }
+    
     /// Designated initializer.
     ///
     /// - parameters:
