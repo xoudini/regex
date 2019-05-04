@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37157E4922611E890024BBFB /* UnsafeArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37157E4822611E890024BBFB /* UnsafeArrayTests.swift */; };
 		379BEF89227B8E66008B4546 /* HashSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BEF88227B8E66008B4546 /* HashSetTests.swift */; };
+		379BEF8B227DE7CA008B4546 /* NegatedExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BEF8A227DE7CA008B4546 /* NegatedExpression.swift */; };
 		379FDBCF227B847E00135EFC /* HashSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FDBCE227B847E00135EFC /* HashSet.swift */; };
 		37D73E17225BDDE300BD94F0 /* Regex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D73E0D225BDDE300BD94F0 /* Regex.framework */; };
 		37D73E1C225BDDE300BD94F0 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D73E1B225BDDE300BD94F0 /* RegexTests.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		37157E4822611E890024BBFB /* UnsafeArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsafeArrayTests.swift; sourceTree = "<group>"; };
 		379BEF88227B8E66008B4546 /* HashSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSetTests.swift; sourceTree = "<group>"; };
+		379BEF8A227DE7CA008B4546 /* NegatedExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegatedExpression.swift; sourceTree = "<group>"; };
 		379FDBCE227B847E00135EFC /* HashSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSet.swift; sourceTree = "<group>"; };
 		37D73E0D225BDDE300BD94F0 /* Regex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Regex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D73E10225BDDE300BD94F0 /* Regex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Regex.h; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				37D73E5D225BE05000BD94F0 /* ConcatenatedExpression.swift */,
 				37D73E5E225BE05000BD94F0 /* ChoiceExpression.swift */,
 				37D73E5F225BE05000BD94F0 /* CharacterExpression.swift */,
+				379BEF8A227DE7CA008B4546 /* NegatedExpression.swift */,
 			);
 			path = Expression;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				37D73E7D225BE05000BD94F0 /* Stack.swift in Sources */,
 				37D73E6F225BE05000BD94F0 /* UnsafeMutablePointer.swift in Sources */,
 				37D73E77225BE05000BD94F0 /* CharacterExpression.swift in Sources */,
+				379BEF8B227DE7CA008B4546 /* NegatedExpression.swift in Sources */,
 				37D73E80225BE05000BD94F0 /* Provider.swift in Sources */,
 				37D73E79225BE05000BD94F0 /* State.swift in Sources */,
 				37D73E7F225BE05000BD94F0 /* UnsafeArray.swift in Sources */,
