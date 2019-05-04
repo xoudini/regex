@@ -6,8 +6,8 @@ import Foundation
 
 /// Symbol type describing what input to match.
 ///
-enum Symbol {
-    case any, set(HashSet<Character>), single(Character)
+indirect enum Symbol {
+    case any, set(HashSet<Character>), single(Character), not(Symbol)
 }
 
 extension Symbol {
@@ -27,6 +27,8 @@ extension Symbol {
             return characterSet.contains(input)
         case .single(let character):
             return input == character
+        case .not(let symbol):
+            return !symbol.matches(input)
         }
     }
 }
