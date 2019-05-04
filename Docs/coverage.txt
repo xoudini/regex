@@ -1,24 +1,26 @@
 Filename                                    Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Collections/HashSet.swift                        23                 0   100.00%          11                 0   100.00%          53                 0   100.00%
+Collections/HashSet.swift                        24                 0   100.00%          12                 0   100.00%          56                 0   100.00%
 Collections/Queue.swift                          20                 1    95.00%          15                 1    93.33%          57                 3    94.74%
 Collections/Stack.swift                          29                 3    89.66%          18                 3    83.33%          69                10    85.51%
 Collections/UnsafeArray.swift                    63                 0   100.00%          28                 0   100.00%         168                 0   100.00%
 Expression/AnyCharacterExpression.swift           2                 0   100.00%           2                 0   100.00%           6                 0   100.00%
 Expression/CharacterExpression.swift              3                 0   100.00%           3                 0   100.00%           9                 0   100.00%
-Expression/ChoiceExpression.swift                 4                 0   100.00%           4                 0   100.00%          11                 0   100.00%
+Expression/ChoiceExpression.swift                 4                 0   100.00%           4                 0   100.00%          14                 0   100.00%
 Expression/ConcatenatedExpression.swift           8                 1    87.50%           5                 0   100.00%          27                 0   100.00%
 Expression/Expression.swift                       1                 0   100.00%           1                 0   100.00%           6                 0   100.00%
+Expression/NegatedExpression.swift                3                 0   100.00%           3                 0   100.00%           9                 0   100.00%
 Expression/OptionalExpression.swift               3                 0   100.00%           3                 0   100.00%          17                 0   100.00%
 Expression/RepeatedExpression.swift               3                 0   100.00%           3                 0   100.00%          20                 0   100.00%
 Expression/UnionExpression.swift                 13                 2    84.62%           7                 1    85.71%          40                 3    92.50%
 Extensions/UnsafeMutablePointer.swift             2                 0   100.00%           2                 0   100.00%           9                 0   100.00%
 NFA/NFA.swift                                    15                 1    93.33%           6                 0   100.00%          48                 0   100.00%
 NFA/State.swift                                  18                 1    94.44%           5                 0   100.00%          37                 0   100.00%
-NFA/Symbol.swift                                  5                 0   100.00%           1                 0   100.00%          10                 0   100.00%
+NFA/Symbol.swift                                  6                 0   100.00%           1                 0   100.00%          12                 0   100.00%
 NFA/Transition.swift                              5                 0   100.00%           2                 0   100.00%          11                 0   100.00%
-Parsing/Parser.swift                             43                 5    88.37%           5                 0   100.00%         116                 0   100.00%
+Parsing/CharacterClass.swift                     11                 2    81.82%           2                 0   100.00%          22                 2    90.91%
+Parsing/Parser.swift                             55                 8    85.45%           6                 0   100.00%         161                 4    97.52%
 Parsing/ParserContext.swift                       5                 0   100.00%           5                 0   100.00%          13                 0   100.00%
 Parsing/Provider.swift                            5                 0   100.00%           3                 0   100.00%          12                 0   100.00%
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                           270                14    94.81%         129                 5    96.12%         739                16    97.83%
+TOTAL                                           298                19    93.62%         136                 5    96.32%         823                22    97.33%
