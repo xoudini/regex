@@ -72,7 +72,16 @@ extension Parser {
                     expression.characterSet.insert(character)
                     stack.push(expression)
                 } else {
-                    stack.push(CharacterExpression(character))
+                    // Handle possible character class
+                    let expression: Expression = {
+                        guard let characterClass = CharacterClass(rawValue: character) else {
+                            return CharacterExpression(character)
+                        }
+                        let set = HashSet(from: characterClass.expanded)
+                        let expression = ChoiceExpression(with: set)
+                        return characterClass.negated ? NegatedExpression(expression) : expression
+                    }()
+                    stack.push(expression)
                 }
                 
             case (_, "\\"):
