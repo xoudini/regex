@@ -95,4 +95,27 @@ class HashSetTests: XCTestCase {
             XCTAssertTrue(self.set.contains(character))
         }
     }
+    
+    func testInsertingDuplicates() {
+        let string = self.lower
+        let duplicates = string.shuffled().dropLast(10)
+        
+        for character in duplicates + string {
+            self.set.insert(character)
+        }
+        
+        XCTAssertEqual(self.set.count, string.count)
+        
+        for character in string {
+            XCTAssertTrue(self.set.contains(character))
+        }
+    }
+    
+    func testIteration() {
+        self.set = HashSet(from: self.digits)
+        
+        for character in self.set {
+            XCTAssertTrue(self.digits.contains(character))
+        }
+    }
 }

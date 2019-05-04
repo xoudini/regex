@@ -77,4 +77,16 @@ class StackTests: XCTestCase {
         XCTAssertEqual(copy.pop(), "a")
         XCTAssertNil(copy.pop())
     }
+    
+    func testConvenienceAccessors() {
+        self.stack.push("x")
+        self.stack.push("y")
+        XCTAssertEqual(self.stack.first, "x")
+        XCTAssertEqual(self.stack.last, "y")
+    }
+    
+    func testConvenienceAccessorsWhenEmpty() {
+        XCTAssertNil(self.stack.first)
+        XCTAssertNil(self.stack.last)
+    }
 }

@@ -103,6 +103,13 @@ class UnsafeArrayTests: XCTestCase {
         XCTAssertEqual(self.array.count, xs.count)
     }
     
+    func testAppendFromArray() {
+        let xs = (0..<50000).shuffled()
+        let array = UnsafeArray(xs)
+        self.array.append(contentsOf: array)
+        XCTAssertEqual(self.array.count, xs.count)
+    }
+    
     func testFirstElement() {
         let value = 15
         self.array.append(value)
@@ -118,6 +125,19 @@ class UnsafeArrayTests: XCTestCase {
     func testBoundsWithEmptyArray() {
         XCTAssertNil(self.array.first)
         XCTAssertNil(self.array.last)
+    }
+    
+    func testCopying() {
+        self.array = [1,2,3,4,5]
+        
+        let copy = self.array.copy()
+        XCTAssertEqual(copy.count, self.array.count)
+        
+        var xs = self.array.makeIterator(), ys = copy.makeIterator()
+        
+        while let x = xs.next(), let y = ys.next() {
+            XCTAssertEqual(x, y)
+        }
     }
     
     func testSliceCopying() {
@@ -214,6 +234,87 @@ class UnsafeArrayTests: XCTestCase {
         }
         
         XCTAssertEqual(result, factorial)
+    }
+    
+    func testMap() {
+        self.array = [1, 2, 3]
+        
+        let transform: (Int) -> String = { $0.description }
+        
+        let mapped = self.array.map(transform)
+        
+        XCTAssertEqual(self.array.count, mapped.count)
+        XCTAssertEqual(mapped[0], "1")
+        XCTAssertEqual(mapped[1], "2")
+        XCTAssertEqual(mapped[2], "3")
+    }
+    
+    func testCompactMap() {
+        let bound = 10
+        let xs = (1...bound).shuffled()
+        self.array = UnsafeArray(xs)
+        
+        let transform: (Int) -> Int? = { $0 & 1 == 0 ? $0 : nil }
+        
+        let compacted: UnsafeArray<Int> = self.array.compactMap(transform)
+        
+        XCTAssertEqual(compacted.count, bound / 2)
+        
+        for value in compacted {
+            XCTAssertNotNil(transform(value))
+        }
+    }
+    
+    func testFlatMap() {
+        let matrix: UnsafeArray<UnsafeArray<Int>> = [[1, 2, 3], [4, 5]]
+        
+        let flattened: UnsafeArray<Int> = matrix.flatMap { $0 }
+        
+        XCTAssertEqual(flattened.count, 5)
+    }
+    
+    func testFilter() {
+        let bound = 10
+        let xs = (1...bound).shuffled()
+        self.array = UnsafeArray(xs)
+        
+        let predicate: (Int) -> Bool = { 4...7 ~= $0 }
+        
+        let filtered: UnsafeArray<Int> = self.array.filter(predicate)
+        
+        XCTAssertEqual(filtered.count, 4)
+        
+        for value in filtered {
+            XCTAssertTrue(predicate(value))
+        }
+    }
+    
+    func testFirst() {
+        let bound = 10
+        let xs = (1...bound).map { $0 }
+        self.array = UnsafeArray(xs)
+        
+        let first = self.array.first { 5 < $0 }
+        
+        XCTAssertNotNil(first)
+        XCTAssertEqual(first, 6)
+    }
+    
+    func testFirstForNonexistingElement() {
+        self.array.append(5)
+        
+        let first = self.array.first { $0 < 4 }
+        
+        XCTAssertNil(first)
+    }
+    
+    func testContains() {
+        let bound = 10
+        let xs = (1...bound).map { $0 }
+        self.array = UnsafeArray(xs)
+        
+        XCTAssertTrue(self.array.contains { 9...15 ~= $0 })
+        XCTAssertFalse(self.array.contains { 10 < $0 })
     }
 
     
