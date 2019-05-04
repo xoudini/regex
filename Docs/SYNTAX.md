@@ -1,6 +1,6 @@
 # Syntax
 
-### Metacharacters
+## Metacharacters
 
 #### Quantifiers
 
@@ -21,15 +21,15 @@
 | Yes          | `(E)`      | `(abc)`    | `abc`       | Some subexpression `E`.
 | Yes          | `[S]`      | `[abc]`    | `a|b|c`     | Matches any character in set `S`.
 | Yes          | `.`        | `.`        |             | Matches any character.
-| No           | `^`        | `^a`, `[^ab]` |          | Negation. Matches any character but the following. 
+| Yes          | `^`        | `^a`, `[^ab]` |          | Negation. Matches any character but the following.
 | Yes          | `|`        | `ab|xy`    |             | Matches either `ab` or `xy`.
 
 
-### Literals
+## Literals
 
 > TODO
 
-### Escape sequences
+## Escape sequences
 
 #### Special characters
 
@@ -52,12 +52,29 @@ In order to match the following characters literally, they should always be esca
 
 #### Character classes
 
-| Implemented? | Sequence  | Equivalent character set | 
-| :----------: | :-------: | :----------------------- |
-| No           | `\w`      | `[A-Za-z0-9_]`           |
-| No           | `\W`      | `[^A-Za-z0-9_]`          |
-| No           | `\d`      | `[0-9]`                  |
-| No           | `\D`      | `[^0-9]`                 |
-| No           | `\s`      | `[ \t\r\n\v\f]`          |
-| No           | `\S`      | `[^ \t\r\n\v\f]`         |
+**NOTE**: Character classes can **not** be used in the bracket context. However, this behaviour can be simulated using the union operation, since e.g. `[\d\s]` is equivalent to `(\d|\s)`.
 
+| Sequence  | Equivalent character set |
+| :-------: | :----------------------- |
+| `\w`      | `[A-Za-z0-9_]`           |
+| `\W`      | `[^A-Za-z0-9_]`          |
+| `\d`      | `[0-9]`                  |
+| `\D`      | `[^0-9]`                 |
+| `\s`      | `[ \t\r\n\v\f]`          |
+| `\S`      | `[^ \t\r\n\v\f]`         |
+| `\l`      | `[a-z]`                  |
+| `\L`      | `[^a-z]`                 |
+| `\u`      | `[A-Z]`                  |
+| `\U`      | `[^A-Z]`                 |
+
+
+
+## Sample expressions
+
+| Expression      | Matches input...
+| :-------------- | :----------
+| `a+`            | ...with at least one `a`, and no other symbols.
+| `ab+`           | ...beginning with `a`, followed by at least one `b`.
+| `\w*`           | ...with any amount of symbols in the set `[A-Za-z0-9_]`.
+| `^a.*`          | ...beginning with any other symbol than `a`.
+| `.*\.(jpg|png)` | ...ending in `.jpg` or `.png`.
