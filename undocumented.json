@@ -1,0 +1,453 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/HashSet.swift",
+      "line": 101,
+      "symbol": "Node.Iterator.node",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/HashSet.swift",
+      "line": 103,
+      "symbol": "Node.Iterator.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/HashSet.swift",
+      "line": 123,
+      "symbol": "HashSet.Iterator.set",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/HashSet.swift",
+      "line": 124,
+      "symbol": "HashSet.Iterator.index",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/HashSet.swift",
+      "line": 126,
+      "symbol": "HashSet.Iterator.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Queue.swift",
+      "line": 112,
+      "symbol": "Queue.Iterator.queue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Queue.swift",
+      "line": 113,
+      "symbol": "Queue.Iterator.index",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Queue.swift",
+      "line": 115,
+      "symbol": "Queue.Iterator.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Stack.swift",
+      "line": 125,
+      "symbol": "Stack.Iterator.stack",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Stack.swift",
+      "line": 126,
+      "symbol": "Stack.Iterator.index",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Collections/Stack.swift",
+      "line": 128,
+      "symbol": "Stack.Iterator.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Errors/ParsingError.swift",
+      "line": 10,
+      "symbol": "ParsingError.emptyExpression",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Errors/ParsingError.swift",
+      "line": 11,
+      "symbol": "ParsingError.invalidSymbol",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Errors/ParsingError.swift",
+      "line": 12,
+      "symbol": "ParsingError.invalidEndState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Errors/ParsingError.swift",
+      "line": 13,
+      "symbol": "ParsingError.unterminatedState",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/AnyCharacterExpression.swift",
+      "line": 15,
+      "symbol": "AnyCharacterExpression.symbol",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/CharacterExpression.swift",
+      "line": 10,
+      "symbol": "CharacterExpression.character",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/CharacterExpression.swift",
+      "line": 12,
+      "symbol": "CharacterExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/CharacterExpression.swift",
+      "line": 19,
+      "symbol": "CharacterExpression.symbol",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ChoiceExpression.swift",
+      "line": 12,
+      "symbol": "ChoiceExpression.characterSet",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ChoiceExpression.swift",
+      "line": 14,
+      "symbol": "ChoiceExpression.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ChoiceExpression.swift",
+      "line": 21,
+      "symbol": "ChoiceExpression.symbol",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ConcatenatedExpression.swift",
+      "line": 12,
+      "symbol": "ConcatenatedExpression.children",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ConcatenatedExpression.swift",
+      "line": 14,
+      "symbol": "ConcatenatedExpression.init(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/ConcatenatedExpression.swift",
+      "line": 18,
+      "symbol": "ConcatenatedExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/Expression.swift",
+      "line": 29,
+      "symbol": "SymbolConvertible.symbol",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/NegatedExpression.swift",
+      "line": 13,
+      "symbol": "NegatedExpression.inner",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/NegatedExpression.swift",
+      "line": 15,
+      "symbol": "NegatedExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/NegatedExpression.swift",
+      "line": 22,
+      "symbol": "NegatedExpression.symbol",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/OptionalExpression.swift",
+      "line": 12,
+      "symbol": "OptionalExpression.inner",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/OptionalExpression.swift",
+      "line": 14,
+      "symbol": "OptionalExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/RepeatedExpression.swift",
+      "line": 12,
+      "symbol": "RepeatedExpression.inner",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/RepeatedExpression.swift",
+      "line": 14,
+      "symbol": "RepeatedExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/UnionExpression.swift",
+      "line": 12,
+      "symbol": "UnionExpression.alternatives",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/UnionExpression.swift",
+      "line": 14,
+      "symbol": "UnionExpression.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Expression/UnionExpression.swift",
+      "line": 24,
+      "symbol": "UnionExpression.append(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/State.swift",
+      "line": 14,
+      "symbol": "State.Category.initial",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/State.swift",
+      "line": 14,
+      "symbol": "State.Category.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/State.swift",
+      "line": 14,
+      "symbol": "State.Category.terminal",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Symbol.swift",
+      "line": 10,
+      "symbol": "Symbol.any",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Symbol.swift",
+      "line": 10,
+      "symbol": "Symbol.not(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Symbol.swift",
+      "line": 10,
+      "symbol": "Symbol.set(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Symbol.swift",
+      "line": 10,
+      "symbol": "Symbol.single(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Transition.swift",
+      "line": 14,
+      "symbol": "Transition.Category.epsilon",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/NFA/Transition.swift",
+      "line": 14,
+      "symbol": "Transition.Category.standard(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 9,
+      "symbol": "asciiUpper",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 10,
+      "symbol": "asciiLower",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 11,
+      "symbol": "digits",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 12,
+      "symbol": "whitespace",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 13,
+      "symbol": "asciiLetters",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 14,
+      "symbol": "base62",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/CharacterClass.swift",
+      "line": 15,
+      "symbol": "base63",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 14,
+      "symbol": "ParserContext.State.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 15,
+      "symbol": "ParserContext.State.escaped",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 16,
+      "symbol": "ParserContext.State.group",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 17,
+      "symbol": "ParserContext.State.union",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 18,
+      "symbol": "ParserContext.State.choice",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/ParserContext.swift",
+      "line": 19,
+      "symbol": "ParserContext.State.negation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 7,
+      "symbol": "Provider",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 8,
+      "symbol": "Provider.string",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 9,
+      "symbol": "Provider.currentIndex",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 11,
+      "symbol": "Provider.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 16,
+      "symbol": "Provider.next()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
+      "line": 22,
+      "symbol": "Provider.stepBack()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/Dan/Desktop/Repositories/regex"
+}

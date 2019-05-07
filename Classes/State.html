@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>State Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/State" class="dashAnchor"></a>
+    <a title="State Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Regex Docs</a> (76% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Regex Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        State Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/HashSet.html">HashSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HashSet/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NFA.html">NFA</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Parser.html">Parser</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ParserContext.html">ParserContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ParserContext/State.html">– State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Provider.html">Provider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Queue.html">Queue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Queue/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Stack.html">Stack</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Stack/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/State.html">State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/State/Category.html">– Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UnsafeArray.html">UnsafeArray</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex12asciiLetters33_807D63811D816BA04B4CC27497215E09LLSSvp">asciiLetters</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex10asciiLower33_807D63811D816BA04B4CC27497215E09LLSSvp">asciiLower</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex10asciiUpper33_807D63811D816BA04B4CC27497215E09LLSSvp">asciiUpper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex6base6233_807D63811D816BA04B4CC27497215E09LLSSvp">base62</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex6base6333_807D63811D816BA04B4CC27497215E09LLSSvp">base63</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex6digits33_807D63811D816BA04B4CC27497215E09LLSSvp">digits</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:5Regex10whitespace33_807D63811D816BA04B4CC27497215E09LLSSvp">whitespace</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/CharacterClass.html">CharacterClass</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Node.html">Node</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Node/Iterator.html">– Iterator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ParsingError.html">ParsingError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Symbol.html">Symbol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UnsafeMutablePointer.html">UnsafeMutablePointer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:5Regex10ExpressionP">Expression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NFAConvertible.html">NFAConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SymbolConvertible.html">SymbolConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AnyCharacterExpression.html">AnyCharacterExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CharacterExpression.html">CharacterExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChoiceExpression.html">ChoiceExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConcatenatedExpression.html">ConcatenatedExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NegatedExpression.html">NegatedExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OptionalExpression.html">OptionalExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RepeatedExpression.html">RepeatedExpression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Transition.html">Transition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Transition/Category.html">– Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UnionExpression.html">UnionExpression</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>State</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">State</span></code></pre>
+
+                </div>
+              </div>
+            <p>A state type used in finite automata.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC8CategoryO"></a>
+                    <a name="//apple_ref/swift/Enum/Category" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC8CategoryO">Category</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An enumerator describing the type of a state.</p>
+
+                        <a href="../Classes/State/Category.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Category</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC8categoryAC8CategoryOvp"></a>
+                    <a name="//apple_ref/swift/Property/category" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC8categoryAC8CategoryOvp">category</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of this state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">category</span><span class="p">:</span> <span class="kt"><a href="../Classes/State/Category.html">Category</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC11transitionsAA11UnsafeArrayCyAA10TransitionVGvp"></a>
+                    <a name="//apple_ref/swift/Property/transitions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC11transitionsAA11UnsafeArrayCyAA10TransitionVGvp">transitions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The transitions of this state.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">transitions</span><span class="p">:</span> <span class="kt"><a href="../Classes/UnsafeArray.html">UnsafeArray</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Transition.html">Transition</a></span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC7closureAA11UnsafeArrayCyACGvp"></a>
+                    <a name="//apple_ref/swift/Property/closure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC7closureAA11UnsafeArrayCyACGvp">closure</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The epsilon-closure of the state.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    The closure is evaluated lazily, once.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="k">var</span> <span class="nv">closure</span><span class="p">:</span> <span class="kt"><a href="../Classes/UnsafeArray.html">UnsafeArray</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC8categoryA2C8CategoryO_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(category:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC8categoryA2C8CategoryO_tcfc">init(category:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Designated initializer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">category</span><span class="p">:</span> <span class="kt"><a href="../Classes/State/Category.html">Category</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">standard</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC3addyyAA10TransitionVF"></a>
+                    <a name="//apple_ref/swift/Method/add(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC3addyyAA10TransitionVF">add(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Method for adding transitions.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">_</span> <span class="nv">transition</span><span class="p">:</span> <span class="kt"><a href="../Structs/Transition.html">Transition</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Structs/Transition.html">Transition</a></code> to add.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Regex5StateC12destinations4fromAA11UnsafeArrayCyACGSJ_tF"></a>
+                    <a name="//apple_ref/swift/Method/destinations(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Regex5StateC12destinations4fromAA11UnsafeArrayCyACGSJ_tF">destinations(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Method reducing the epsilon-closure of the instance into a set of new
+states, depending on whether the reduced states accept the input.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>May be expensive if <code><a href="../Classes/State.html#/s:5Regex5StateC7closureAA11UnsafeArrayCyACGvp">closure</a></code> hasn&rsquo;t yet been accessed
+            on this instance.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">destinations</span><span class="p">(</span><span class="n">from</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">Character</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/UnsafeArray.html">UnsafeArray</a></span><span class="o">&lt;</span><span class="kt">State</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A <code>Character</code> to match against.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A set of <code>State</code> instances resulting from a match.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">Dan Lindholm</a>. All rights reserved. (Last updated: 2019-05-07)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
