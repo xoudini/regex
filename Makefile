@@ -2,6 +2,7 @@ _BUILD_DIR      = .build
 _DOCKER_IMAGE   = regex
 _DESTINATION    = 'platform=macOS,arch=x86_64'
 _DOCS_DIR       = Docs
+_JAZZY_OUT      = $(_DOCS_DIR)/Jazzy
 _DD_DIR         = /tmp/RegexData
 _COVERAGE       = coverage.txt
 _EXECUTABLE     = rift
@@ -43,6 +44,24 @@ $(_COVERAGE): test
 coverage: $(_COVERAGE)
 
 
+.SILENT: $(_JAZZY_OUT) jazzy
+$(_JAZZY_OUT):
+	$(call colorize,3,"Generating documentation...")
+
+	jazzy                                           \
+	    -o $(_JAZZY_OUT)                            \
+	    -a "Dan Lindholm"                           \
+	    -m "Regex"                                  \
+		-x "-project,Regex.xcodeproj"               \
+		--min-acl private
+
+	$(call colorize,2,"Generated documentation at: $(_JAZZY_OUT)")
+
+	open $(_JAZZY_OUT)
+
+jazzy: $(_JAZZY_OUT)
+
+
 .SILENT: $(_EXECUTABLE)
 $(_EXECUTABLE):
 	swift build --configuration release
@@ -66,10 +85,15 @@ endif
 
 
 clean:
-	$(call colorize,3,"Removing build files...")
+	$(call colorize,1,"Removing build files...")
 	rm -rf $(_BUILD_DIR)
 	rm -rf $(_DD_DIR)
+
+	$(call colorize,1,"Removing link to executable...")
 	rm -f $(_EXECUTABLE)
+
+	$(call colorize,1,"Removing auto-generated documentation...")
+	rm -rf $(_JAZZY_OUT)
 
 
 # Docker
