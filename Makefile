@@ -4,6 +4,7 @@ _DESTINATION    = 'platform=macOS,arch=x86_64'
 _DOCS_DIR       = Docs
 _DD_DIR         = /tmp/RegexData
 _COVERAGE       = coverage.txt
+_EXECUTABLE     = rift
 _PROF_PATH      = $(shell find $(_DD_DIR)/. -name Coverage.profdata)
 _FMWK_PATH      = $(shell find $(_DD_DIR)/. -name Regex.framework)
 CONFIG         ?= Debug
@@ -42,6 +43,12 @@ $(_COVERAGE): test
 coverage: $(_COVERAGE)
 
 
+.SILENT: $(_EXECUTABLE)
+$(_EXECUTABLE):
+	swift build --configuration release
+	ln -s $(_BUILD_DIR)/release/$(_EXECUTABLE) $(_EXECUTABLE)
+
+
 .PHONY: run update clean
 .SILENT: run update clean
 run:
@@ -62,6 +69,7 @@ clean:
 	$(call colorize,3,"Removing build files...")
 	rm -rf $(_BUILD_DIR)
 	rm -rf $(_DD_DIR)
+	rm -f $(_EXECUTABLE)
 
 
 # Docker
