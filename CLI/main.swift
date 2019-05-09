@@ -19,6 +19,11 @@ Usage:
                          will be read from standard input.
  -n --numbered          The lines will be numbered, starting from 1. Only used
                          on input from standard input.
+ -e --eof               Reads all available input once until encountering an
+                         EOF. Since input from stdin will be buffered in
+                         chunks of different sizes depending on platform, this
+                         option is recommended for large input - i.e. larger
+                         than 4kB or so.
 
 Example usage for Swift Package Manager:
 · Using the input flag:
@@ -40,7 +45,7 @@ func writeUsage() {
 // MARK: Declarations
 
 var regex: String?, input: String?
-var numbered: Bool = false
+var numbered: Bool = false, eof: Bool = false
 
 
 // MARK: Argument parsing
@@ -58,6 +63,9 @@ ArgumentParser(
     },
     Option(name: "numbered", short: "n") { _ in
         numbered = true
+    },
+    Option(name: "eof", short: "e") { _ in
+        eof = true
     }
 ).parse(arguments: CommandLine.arguments)
 
@@ -86,8 +94,13 @@ do {
     
     var lineCount = 0
     
-    // Read from standard input and match line by line.
-    while let input = String(data: standardInput.availableData, encoding: .utf8), !input.isEmpty {
+    // Getter for data source depending on whether the EOF flag is set.
+    let dataGetter: (FileHandle) -> Data = { eof ? $0.readDataToEndOfFile() : $0.availableData }
+    
+    // Read data from standard input...
+    while let input = String(data: dataGetter(standardInput), encoding: .utf8), !input.isEmpty {
+        
+        // ...and match line by line.
         input.enumerateLines { (line, stop) in lineCount += 1
             guard nfa.matches(line) else { return }
             
