@@ -43,25 +43,29 @@ Since the NFA is built by converting expressions into sub-automata of limited si
 
 ### Matching
 
-> TODO
+Matching is performed using a queue-based breadth-first search approach. Using the NFA this can lead to some inefficiencies, since the amount of valid transitions for the next iteration can grow exponentially for each input character. An example of an expression causing this behavious is `(.+)+`. However, for non-malicious regular expressions, the matching is rather efficient even against large input.
 
 
 ### Complexities
+
+The following table describes the upper bounds for each operation.
 
 | Operation | Time   | Space  |
 | --------- | ------ | ------ |
 | Parsing   | `O(r)` | `O(r)` |
 | NFA       | `O(r)` | `O(r)` |
-| Matching  | `O(2^n)` | `O(r + n)` |
+| Matching  | `O(2^n)` | `O(2^n)` |
 
 Where `r` is the length of the regular expression, and `n` is the length of the input.
 
 
 ## Comparison
 
-The program will be compared against `grep` with extended syntax with normal, non-malicious regular expressions. The tested regular expressions will obviously be somewhat constrained, due to the more limited syntax and feature set of this implementation.
+The program has also been compared against `grep` using extended syntax with normal, non-malicious regular expressions. The tested regular expressions are obviously somewhat constrained, due to the slightly more limited syntax and feature set of this implementation. The comparisons have been performed on macOS 10.14.4 with a 3.5 GHz Intel i7-4771 processor.
 
-After some initial comparisons, I've found `grep` to be roughly 2-3 times faster than the program compiled with optimizations on a 3.5 GHz Intel i7-4771 processor. A more thorough comparison including test cases will be made available soon.
+After some initial comparisons, I've found `grep` to be roughly 3-15 times faster than the program compiled with optimizations, depending on a variety of factors. Since `rift` doesn't support partial matching, a regular expression covering entire lines must be given, which may contribute to the inefficiency.
+
+A CSV-file with performance comparison between `rift` and `grep` can be found [here](performance.csv). As can be seen, in some cases the performance is nearly on par with grep (i.e. within an order of magnitude). However, the comparisons are somewhat different running in a container with Linux. In the container, `grep` fails on one input, and finishes in `0.00` seconds on the remaining inputs, which leads me to believe that the implementation is different.
 
 
 ## Possible flaws and improvements
