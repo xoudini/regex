@@ -42,7 +42,7 @@ cat $TIMESTAMP | tr -d '\n' >> $OUTFILE
 echo -n "," >> $OUTFILE
 
 # Append grep result
-tail -n +2 $@ | $TIME -p -f '%e' -o $TIMESTAMP $GREP -E "$REGEX" > result-grep.tmp
+tail -n +2 $@ | $TIME -p -f '%e' -o $TIMESTAMP $GREP -E "^$REGEX\$" > result-grep.tmp
 cat $TIMESTAMP | tr -d '\n' >> $OUTFILE
 echo -n "," >> $OUTFILE
 

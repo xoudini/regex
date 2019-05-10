@@ -1,7 +1,7 @@
 filename,lines,bytes,regex,rift,grep,matches
-Samples/alice_in_wonderland.txt,    3600,  148589,.*([Kk]ing?).*,0.14,0.01,182
-Samples/bacon.txt,    4936,  339322,.*[Gg]?[Rr]ound.*,0.42,0.02,582
-Samples/delorean.txt,   20001, 3272699,.*(McFly|[Dd]e[Ll]orean).*,3.86,0.24,1950
+Samples/alice_in_wonderland.txt,    3600,  148589,.*([Kk]ing?).*,0.15,0.01,182
+Samples/bacon.txt,    4936,  339320,[Gg]?[Rr]ound.*,0.07,0.02,62
+Samples/delorean.txt,   20001, 3272705,(\w+\s)*(McFly|[Dd]e[Ll]orean).*,0.63,0.25,54
 Samples/entities.py.txt,    2510,   75348,\s+('\w+'):\s+0x(\d|[abcdef])+.*,0.08,0.00,252
-Samples/ipsum.txt,     603,  179922,.* Sed (amet|quis|felis).*,0.15,0.01,5
+Samples/ipsum.txt,     603,  179920,Sed.*(amet|quis|felis).*,0.06,0.01,24
 Samples/smackfs.c.txt,    2991,   70561,\s+\.\w+\s?=\s?\w+(start|release|super)\W?,0.02,0.00,17
