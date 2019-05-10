@@ -28,6 +28,8 @@ The auto-generated documentation is available [here](https://xoudini.github.io/r
 
 ## Running the project
 
+The latest compiled binaries for macOS and Linux can be found in the [latest release](../../releases/tag/19.05.10).
+
 ### macOS
 
 The most straight-forward way is to simply install Xcode, but downloading the Swift distribution should be enough.
