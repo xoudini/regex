@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Setup
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    TIME="gtime"
+else
+    TIME="/usr/bin/time"
+fi
+
+
 RIFT=./rift
 GREP=grep
 OUTFILE=Docs/performance.csv
@@ -29,12 +37,12 @@ echo -n "," >> $OUTFILE
 
 
 # Append rift result
-tail -n +2 $@ | gtime -p -f '%e' -o $TIMESTAMP $RIFT -e -r "$REGEX" > result-rift.tmp
+tail -n +2 $@ | $TIME -p -f '%e' -o $TIMESTAMP $RIFT -e -r "$REGEX" > result-rift.tmp
 cat $TIMESTAMP | tr -d '\n' >> $OUTFILE
 echo -n "," >> $OUTFILE
 
 # Append grep result
-tail -n +2 $@ | gtime -p -f '%e' -o $TIMESTAMP $GREP -E "$REGEX" > result-grep.tmp
+tail -n +2 $@ | $TIME -p -f '%e' -o $TIMESTAMP $GREP -E "$REGEX" > result-grep.tmp
 cat $TIMESTAMP | tr -d '\n' >> $OUTFILE
 echo -n "," >> $OUTFILE
 

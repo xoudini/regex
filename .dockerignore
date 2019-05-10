@@ -1,6 +1,5 @@
 .build/
 .git/
-Docs/
 *.xcodeproj/
 *.xcworkspace/
 
@@ -8,3 +7,5 @@ Docs/
 .gitignore
 *.md
 Dockerfile
+
+rift
