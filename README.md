@@ -13,6 +13,7 @@ The auto-generated documentation is available [here](https://xoudini.github.io/r
  - [Test coverage](Docs/coverage.txt)
  - [Performance comparison with `grep`](Docs/performance.csv)
 - [x] [User guide](Docs/USAGE.md)
+ - [Syntax sheet](Docs/SYNTAX.md)
 
 
 ## Reports
