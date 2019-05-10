@@ -25,9 +25,6 @@
 | Yes          | `|`        | `ab|xy`    |             | Matches either `ab` or `xy`.
 
 
-## Literals
-
-> TODO
 
 ## Escape sequences
 
