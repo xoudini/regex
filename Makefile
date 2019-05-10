@@ -2,12 +2,16 @@ _BUILD_DIR      = .build
 _DOCKER_IMAGE   = regex
 _DESTINATION    = 'platform=macOS,arch=x86_64'
 _DOCS_DIR       = Docs
+_SAMPLE_DIR     = Samples
 _JAZZY_OUT      = $(_DOCS_DIR)/Jazzy
 _DD_DIR         = /tmp/RegexData
 _COVERAGE       = coverage.txt
+_TEST_SCRIPT    = comparison.sh
+_TEST_RESULT    = $(_DOCS_DIR)/performance.csv
 _EXECUTABLE     = rift
 _PROF_PATH      = $(shell find $(_DD_DIR)/. -name Coverage.profdata)
 _FMWK_PATH      = $(shell find $(_DD_DIR)/. -name Regex.framework)
+_TEST_FILES     = $(wildcard $(_SAMPLE_DIR)/*.txt)
 CONFIG         ?= Debug
 
 
@@ -62,19 +66,20 @@ $(_JAZZY_OUT):
 jazzy: $(_JAZZY_OUT)
 
 
-.SILENT: $(_EXECUTABLE)
+.SILENT: $(_EXECUTABLE) comparison
 $(_EXECUTABLE):
 	swift build --configuration release
 	ln -s $(_BUILD_DIR)/release/$(_EXECUTABLE) $(_EXECUTABLE)
 
 
-.PHONY: run update clean
-.SILENT: run update clean
-run:
-	$(call colorize,3,"Running using Swift package manager.")
-	swift run
+comparison: $(_EXECUTABLE) $(_TEST_FILES)
+	@echo filename,lines,bytes,regex,rift,grep,matches > $(_TEST_RESULT)
+	$(foreach file,$(_TEST_FILES),./$(_TEST_SCRIPT) $(file);)
 
+# $(foreach file,$(_TEST_FILES),$(call runcomparison,$(file));)
 
+.PHONY: update clean
+.SILENT: update clean
 update:
 ifeq ($(shell uname),Darwin)
 	$(call colorize,3,"Resolving tests for Linux...")
