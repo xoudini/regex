@@ -41,3 +41,8 @@ Package.resolved
 ## Custom
 .DS_Store
 Docs/Jazzy
+Samples/*
+!Samples/.dummy
+
+## Link to executable
+rift
