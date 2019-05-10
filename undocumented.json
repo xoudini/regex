@@ -405,48 +405,6 @@
       "symbol": "ParserContext.State.negation",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 7,
-      "symbol": "Provider",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 8,
-      "symbol": "Provider.string",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 9,
-      "symbol": "Provider.currentIndex",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 11,
-      "symbol": "Provider.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 16,
-      "symbol": "Provider.next()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/Dan/Desktop/Repositories/regex/Source/Parsing/Provider.swift",
-      "line": 22,
-      "symbol": "Provider.stepBack()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/Dan/Desktop/Repositories/regex"
